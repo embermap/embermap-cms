@@ -1,0 +1,34 @@
+<h1>Blog posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <a href="" {{action 'sort' 'title'}}>Title</a>
+      </th>
+      <th>
+        <a href="" {{action 'sort' 'author'}}>Author</a>
+      </th>
+      <th>
+        <a href="" {{action 'sort' 'category'}}>Category</a>
+      </th>
+      <th>
+        <a href="" {{action 'sort' 'comments.length'}}>Comments</a>
+      </th>
+      <th>
+        <a href="" {{action 'sort' 'date'}}>Date</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedPosts as |post|}}
+      <tr>
+        <td>{{post.title}}</td>
+        <td>{{post.author}}</td>
+        <td>{{post.category}}</td>
+        <td>{{post.comments.length}}</td>
+        <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

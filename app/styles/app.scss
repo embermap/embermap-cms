@@ -1,0 +1,92 @@
+@import './reset';
+@import './tachyons';
+
+body {
+  overflow: hidden;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  @extend .avenir;
+}
+
+.app-header {
+  background: #2196f3;
+  color: white;
+  padding: 15px 20px;
+  @extend .f4;
+}
+
+.app-main {
+  // background: grey;
+  flex-grow: 1;
+  display: flex;
+}
+
+.side-panel {
+  width: 200px;
+  background: #EEEEEE;
+  border-right: 1px solid #ddd;
+
+  a {
+    @extend .db;
+    color: #888;
+    text-decoration: none;
+    padding: 20px;
+    border-bottom: 1px solid #bbb;
+
+    &.active {
+      background: white;
+      border-right: 5px solid #2196f3;
+    }
+  }
+}
+
+.center-panel {
+  // background: red;
+  flex-grow: 1;
+  padding: 40px;
+  overflow: scroll;
+}
+
+h1 {
+  margin-top: 10px;
+  // padding: 20px;
+}
+
+table {
+  @extend .w-100;
+  @extend .mt5;
+  // display: flex;
+  // flex-direction: column;
+  border: 1px solid #ddd;
+}
+
+thead a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+tbody {
+
+}
+
+th {
+  text-transform: uppercase;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px 15px;
+}
+
+td {
+  border-top: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background: rgb(250,250,250);
+}

@@ -1,0 +1,28 @@
+<div class='app'>
+  <header class='app-header'>
+    Acme, Inc.
+  </header>
+
+  <main class='app-main'>
+    <section class='side-panel'>
+      {{#link-to 'dashboard'}}
+        Dashboard
+      {{/link-to}}
+      {{#link-to 'posts'}}
+        Blog posts
+      {{/link-to}}
+      {{#link-to 'media'}}
+        Media
+      {{/link-to}}
+      {{#link-to 'comments'}}
+        Comments
+      {{/link-to}}
+    </section>
+
+    <section class='center-panel'>
+
+      {{outlet}}
+
+    </section>
+  </main>
+</div>

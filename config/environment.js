@@ -4,6 +4,7 @@
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'd3-demo',
+    podModulePrefix: 'd3-demo/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
@@ -21,6 +22,10 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    'ember-cli-mirage': {
+      discoverEmberDataModels: true
     }
   };
 

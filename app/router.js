@@ -7,6 +7,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('dashboard');
+  this.route('posts');
+  this.route('media');
+  this.route('comments');
 });
 
 export default Router;
