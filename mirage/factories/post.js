@@ -1,6 +1,8 @@
 import { Factory, trait, faker } from 'ember-cli-mirage';
 
-let authors = [1, 2, 3].map(() => faker.name.findName());
+let authors = [1, 2, 3, 4, 5, 6].map(() => faker.name.findName());
+let commentCounts = [1, 2, 5, 9, 13, 25, 60];
+// let commentCounts = [1, 2, 5];
 
 export default Factory.extend({
 
@@ -10,7 +12,7 @@ export default Factory.extend({
   },
 
   author() {
-    let i = faker.random.number({ min: 0, max: 2 });
+    let i = faker.random.number({ min: 0, max: authors.length - 1 });
 
     return authors[i];
   },
@@ -20,16 +22,32 @@ export default Factory.extend({
   },
 
   category() {
-    let i = faker.random.number({ min: 0, max: 2 });
+    let x = faker.random.number({ min: 0, max: 10 });
+    let i;
+
+    if (x < 4) {
+      i = 0;
+    } else if (x < 9) {
+      i = 1;
+    } else {
+      i = 2;
+    }
 
     return ['Economics', 'Programming', 'Literature'][i];
   },
 
+  commentCount() {
+    let i = faker.random.number({ min: 0, max: commentCounts.length - 1 });
+
+    return commentCounts[i];
+  },
+
   withComments: trait({
     afterCreate(post, server) {
-      let i = faker.random.number({ min: 1, max: 4 });
+      let i = faker.random.number({ min: 0, max: commentCounts.length - 1 });
+      let commentCount = commentCounts[i];
 
-      server.createList('comment', i, { post });
+      server.createList('comment', commentCount, { post });
     }
   })
 

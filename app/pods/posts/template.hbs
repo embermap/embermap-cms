@@ -1,5 +1,26 @@
 <h1>Blog posts</h1>
 
+<div class='charts'>
+  <div class="chart">
+    {{responsive-bar-chart
+      data=authorData
+      color='blue'}}
+    <h2>Author</h2>
+  </div>
+  <div class="chart">
+    {{responsive-bar-chart
+      data=categoryData
+      color='green'}}
+    <h2>Category</h2>
+  </div>
+  <div class="chart">
+    {{responsive-bar-chart
+      data=commentsData
+      color='red'}}
+    <h2>Comments</h2>
+  </div>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -13,7 +34,7 @@
         <a href="" {{action 'sort' 'category'}}>Category</a>
       </th>
       <th>
-        <a href="" {{action 'sort' 'comments.length'}}>Comments</a>
+        <a href="" {{action 'sort' 'commentCount'}}>Comments</a>
       </th>
       <th>
         <a href="" {{action 'sort' 'date'}}>Date</a>
@@ -26,7 +47,7 @@
         <td>{{post.title}}</td>
         <td>{{post.author}}</td>
         <td>{{post.category}}</td>
-        <td>{{post.comments.length}}</td>
+        <td>{{post.commentCount}}</td>
         <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
       </tr>
     {{/each}}
