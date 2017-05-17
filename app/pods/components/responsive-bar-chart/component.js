@@ -12,11 +12,12 @@ const colors = {
 export default Ember.Component.extend({
 
   color: 'blue',
+  selectedLabel: null,
 
   highlightedData: Ember.computed('hoveredLabel', 'selectedLabel', function() {
     let targetLabel;
 
-    if (this.get('selectedLabel') !== undefined) {
+    if (this.get('selectedLabel')) { // null or undefined
       targetLabel = this.get('selectedLabel');
     } else if (this.get('hoveredLabel') !== undefined) {
       targetLabel = this.get('hoveredLabel');
@@ -27,10 +28,12 @@ export default Ember.Component.extend({
     });
   }),
 
-  highlightedBar: Ember.computed('highlightedData', function() {
-    let i = this.get('data').indexOf(this.get('highlightedData'));
-
-    return this.$('rect')[i];
+  highlightedBar: Ember.computed('highlightedData', 'bars', function() {
+    if (this.get('bars') && this.get('highlightedData')) {
+      return this.get('bars')
+        .filter((d) => d === this.get('highlightedData'))
+        .node();
+    }
   }),
 
   didInsertElement() {
@@ -49,9 +52,9 @@ export default Ember.Component.extend({
       .domain([ 0, max(this.get('data').map(d => d.count)) ])
       .range(colors[this.get('color')]);
 
-    let bars = svg.selectAll('rect')
-      .data(this.get('data'))
-      .enter().append('rect')
+    let bars = svg.selectAll('rect').data(this.get('data'))
+      .enter()
+      .append('rect')
       .attr('width', `${xScale.bandwidth()}%`)
       .attr('height', (d) => `${yScale(d.count)}%`)
       .attr('x', (d) => `${xScale(d.label)}%`)
@@ -66,18 +69,25 @@ export default Ember.Component.extend({
       this.set('hoveredLabel', undefined);
     });
 
-    bars.on('click', ({ label }) => {
-      if (this.get('selectedLabel') !== label) {
-        this.set('selectedLabel', label);
-
-        bars.filter((d) => d.label !== label)
-          .attr('opacity', '0.5');
-        bars.filter((d) => d.label === label)
-          .attr('opacity', '1');
-      } else {
-        this.set('selectedLabel', undefined);
-        bars.attr('opacity', '1');
-      }
+    bars.on('click', (d) => {
+      this.get('on-click')(d.label);
     });
+
+    this.set('bars', bars);
+  },
+
+  didRender() {
+    if (this.get('bars')) {
+      let label = this.get('selectedLabel');
+
+      this.get('bars')
+        .attr('opacity', (d) => {
+          if (label) {
+            return (d.label === label) ? '1' : '0.5';
+          } else {
+            return '1';
+          }
+        });
+    }
   }
 });

@@ -4,19 +4,26 @@
   <div class="chart">
     {{responsive-bar-chart
       data=authorData
-      color='blue'}}
+      color='blue'
+      on-click=(action 'toggleBar' 'selectedAuthor')
+      selectedLabel=selectedAuthor}}
     <h2>Author</h2>
   </div>
   <div class="chart">
     {{responsive-bar-chart
       data=categoryData
-      color='green'}}
+      color='green'
+      on-click=(action 'toggleBar' 'selectedCategory')
+      selectedLabel=selectedCategory}}
     <h2>Category</h2>
   </div>
   <div class="chart">
     {{responsive-bar-chart
       data=commentsData
-      color='red'}}
+      color='red'
+      on-click=(action 'toggleBar' 'selectedTitle')
+      selectedLabel=selectedTitle}}
+      {{selectedTitle}}
     <h2>Comments</h2>
   </div>
 </div>
@@ -42,7 +49,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each sortedPosts as |post|}}
+    {{#each posts as |post|}}
       <tr>
         <td>{{post.title}}</td>
         <td>{{post.author}}</td>
