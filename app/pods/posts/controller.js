@@ -42,12 +42,25 @@ export default Ember.Controller.extend({
       .filter(post => selectedTitle ? (post.get('title') === selectedTitle) : true);
   }),
 
-  selectedAuthor: 'Kathryne Raynor',
-  authorData: groupBy('model', 'author'),
+  selectedCategory: 'Economics',
+  // selectedAuthor: 'Kathryne Raynor',
+  // filteredData: Ember.computed('model.[]', 'selectedCategory', function() {
+  //   let data = this.get('model');
+  //
+  //   if (this.get('selectedCategory')) {
+  //     data = data.filterBy('category', this.get('selectedCategory'));
+  //   }
+  //
+  //   return data;
+  // }),
+  //
 
-  categoryData: groupBy('model', 'category'),
-  commentsData: Ember.computed('model.[]', function() {
-    return this.get('model')
+  authorData: groupBy('posts', 'author'),
+
+  categoryData: groupBy('posts', 'category'),
+
+  commentsData: Ember.computed('posts.[]', function() {
+    return this.get('posts')
       .map((m) => {
         return {
           label: m.get('title'),

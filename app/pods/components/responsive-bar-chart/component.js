@@ -1,6 +1,8 @@
+/* global Tether */
 import Ember from 'ember';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleBand } from 'd3-scale';
+import { transition } from 'd3-transition';
 import { max } from 'd3-array';
 
 const colors = {
@@ -14,10 +16,10 @@ export default Ember.Component.extend({
   color: 'blue',
   selectedLabel: null,
 
-  highlightedData: Ember.computed('hoveredLabel', 'selectedLabel', function() {
+  highlightedData: Ember.computed('hoveredLabel', 'selectedLabel', 'data.[]', function() {
     let targetLabel;
 
-    if (this.get('selectedLabel')) { // null or undefined
+    if (this.get('selectedLabel')) {
       targetLabel = this.get('selectedLabel');
     } else if (this.get('hoveredLabel') !== undefined) {
       targetLabel = this.get('hoveredLabel');
@@ -28,66 +30,100 @@ export default Ember.Component.extend({
     });
   }),
 
-  highlightedBar: Ember.computed('highlightedData', 'bars', function() {
-    if (this.get('bars') && this.get('highlightedData')) {
-      return this.get('bars')
+  highlightedBar: Ember.computed('highlightedData', 'didRenderChart', function() {
+    if (this.get('didRenderChart') && this.get('highlightedData')) {
+      return select(this.$('svg')[0]).selectAll('rect')
         .filter((d) => d === this.get('highlightedData'))
         .node();
     }
   }),
 
   didInsertElement() {
-    let svg = select(this.$('svg')[0]);
-
-    let xScale = scaleBand()
-      .domain(this.get('data').map(d => d.label))
+    this.set('xScale', scaleBand()
       .range([0, 100])
-      .padding(0.2);
+      .padding(0.2));
 
-    let yScale = scaleLinear()
-      .domain([ 0, max(this.get('data').map(d => d.count)) ])
-      .range([0, 100]);
+    this.set('yScale', scaleLinear()
+      .range([0, 100]));
 
-    let color = scaleLinear()
-      .domain([ 0, max(this.get('data').map(d => d.count)) ])
-      .range(colors[this.get('color')]);
+    this.set('colorScale', scaleLinear()
+      .range(colors[this.get('color')]));
 
-    let bars = svg.selectAll('rect').data(this.get('data'))
+    this.renderChart();
+  },
+
+  didUpdateAttrs() {
+    this.renderChart();
+  },
+
+  renderChart() {
+    let { xScale, yScale, colorScale } = this.getProperties('xScale', 'yScale', 'colorScale');
+    let data = this.get('data').sortBy('label');
+
+    xScale.domain(data.map(d => d.label));
+    yScale.domain([ 0, max(data.map(d => d.count)) ]);
+    colorScale.domain([ 0, max(data.map(d => d.count)) ]);
+
+    let bars = select(this.$('svg')[0])
+      .selectAll('rect')
+      .data(data, (d) => d.label);
+
+    let barsEnter = bars
       .enter()
       .append('rect')
+      .attr('opacity', 0);
+
+    let label = this.get('selectedLabel');
+
+    let rafId;
+    let t = transition()
+      .on('start', function(d, i) {
+        if (i === 0) {
+          (function updateTether() {
+            Tether.position();
+            rafId = requestAnimationFrame(updateTether);
+          })();
+        }
+      })
+      .on('end interrupt', (d, i) => {
+        if (i === 0) {
+          cancelAnimationFrame(rafId);
+        }
+      });
+
+    barsEnter.merge(bars)
+      .transition(t)
       .attr('width', `${xScale.bandwidth()}%`)
       .attr('height', (d) => `${yScale(d.count)}%`)
       .attr('x', (d) => `${xScale(d.label)}%`)
       .attr('y', (d) => `${100 - yScale(d.count)}%`)
-      .attr('fill', (d) => color(d.count));
+      .attr('fill', (d) => colorScale(d.count))
+      .attr('opacity', (d) => {
+        if (label) {
+          return (d.label === label) ? '1' : '0.5';
+        } else {
+          return '1';
+        }
+      });
 
-    bars.on('mouseover', (d) => {
+    bars.exit()
+      .transition()
+      .attr('opacity', 0)
+      .remove();
+
+    barsEnter.on('mouseover', (d) => {
       this.set('hoveredLabel', d.label);
     });
 
-    bars.on('mouseout', () => {
+    barsEnter.on('mouseout', () => {
       this.set('hoveredLabel', undefined);
     });
 
-    bars.on('click', (d) => {
+    barsEnter.on('click', (d) => {
       this.get('on-click')(d.label);
     });
 
-    this.set('bars', bars);
-  },
-
-  didRender() {
-    if (this.get('bars')) {
-      let label = this.get('selectedLabel');
-
-      this.get('bars')
-        .attr('opacity', (d) => {
-          if (label) {
-            return (d.label === label) ? '1' : '0.5';
-          } else {
-            return '1';
-          }
-        });
-    }
+    this.set('didRenderChart', true);
   }
+
 });
