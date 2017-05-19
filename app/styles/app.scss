@@ -84,6 +84,12 @@ th, td {
   padding: 12px 15px;
 }
 
+th:nth-child(1) { width: 30%; }
+th:nth-child(2) { width: 20%; }
+th:nth-child(3) { width: 20%; }
+th:nth-child(4) { width: 15%; }
+th:nth-child(5) { width: 15%; }
+
 td {
   border-top: 1px solid #ddd;
 }
