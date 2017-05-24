@@ -1,32 +1,5 @@
 <h1>Blog posts</h1>
 
-<div class='charts'>
-  <div class="chart">
-    {{responsive-bar-chart
-      data=authorData
-      color='blue'
-      on-click=(action 'toggleBar' 'selectedAuthor')
-      selectedLabel=selectedAuthor}}
-    <h2>Author</h2>
-  </div>
-  <div class="chart">
-    {{responsive-bar-chart
-      data=categoryData
-      color='green'
-      on-click=(action 'toggleBar' 'selectedCategory')
-      selectedLabel=selectedCategory}}
-    <h2>Category</h2>
-  </div>
-  <div class="chart">
-    {{responsive-bar-chart
-      data=commentsData
-      color='red'
-      on-click=(action 'toggleBar' 'selectedTitle')
-      selectedLabel=selectedTitle}}
-    <h2>Comments</h2>
-  </div>
-</div>
-
 <table>
   <thead>
     <tr>
