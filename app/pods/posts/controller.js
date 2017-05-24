@@ -6,18 +6,7 @@ export default Ember.Controller.extend({
   postsSorting: Ember.computed('activeSortBy', function() {
     return [ this.get('activeSortBy') ];
   }),
-
-  sortedPosts: Ember.computed.sort('model', 'postsSorting'),
-  posts: Ember.computed('sortedPosts.[]', 'selectedAuthor', 'selectedCategory', 'selectedTitle', function() {
-    let selectedAuthor = this.get('selectedAuthor');
-    let selectedCategory = this.get('selectedCategory');
-    let selectedTitle = this.get('selectedTitle');
-
-    return this.get('sortedPosts')
-      .filter(post => selectedAuthor ? (post.get('author') === selectedAuthor) : true)
-      .filter(post => selectedCategory ? (post.get('category') === selectedCategory) : true)
-      .filter(post => selectedTitle ? (post.get('title') === selectedTitle) : true);
-  }),
+  posts: Ember.computed.sort('model', 'postsSorting'),
 
   actions: {
     sort(field) {
