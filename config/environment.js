@@ -3,8 +3,8 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'd3-demo',
-    podModulePrefix: 'd3-demo/pods',
+    modulePrefix: 'embermap-cms',
+    podModulePrefix: 'embermap-cms/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
