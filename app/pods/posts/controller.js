@@ -1,28 +1,5 @@
 import Ember from 'ember';
 
-const groupBy = function(array, property) {
-  return Ember.computed(`${array}.[]`, function() {
-    return this.get(array)
-      .map(post => {
-        return {
-          label: post.get(property),
-          count: 1
-        };
-      })
-      .reduce((memo, { label, count }) => {
-        let found = memo.find(obj => obj.label === label);
-
-        if (found) {
-          found.count++
-        } else {
-          memo.push({ label, count });
-        }
-
-        return memo;
-      }, []);
-  });
-}
-
 export default Ember.Controller.extend({
 
   activeSortBy: 'date',
@@ -42,33 +19,6 @@ export default Ember.Controller.extend({
       .filter(post => selectedTitle ? (post.get('title') === selectedTitle) : true);
   }),
 
-  selectedCategory: 'Economics',
-  // selectedAuthor: 'Kathryne Raynor',
-  // filteredData: Ember.computed('model.[]', 'selectedCategory', function() {
-  //   let data = this.get('model');
-  //
-  //   if (this.get('selectedCategory')) {
-  //     data = data.filterBy('category', this.get('selectedCategory'));
-  //   }
-  //
-  //   return data;
-  // }),
-  //
-
-  authorData: groupBy('posts', 'author'),
-
-  categoryData: groupBy('posts', 'category'),
-
-  commentsData: Ember.computed('posts.[]', function() {
-    return this.get('posts')
-      .map((m) => {
-        return {
-          label: m.get('title'),
-          count: m.get('commentCount')
-        };
-      })
-  }),
-
   actions: {
     sort(field) {
       if (field === this.get('activeSortBy')) {
@@ -76,10 +26,6 @@ export default Ember.Controller.extend({
       } else {
         this.set('activeSortBy', field);
       }
-    },
-
-    toggleBar(bar, label) {
-      this.set(bar, (this.get(bar) === label) ? null : label)
     }
   }
 
