@@ -1,14 +1,26 @@
 <h1>Blog posts</h1>
 
-<div class="flex">
+<div class="flex tc">
   <div class="flex-auto ph4">
-    {{bar-chart}}
+    {{bar-chart data=authorData}}
+
+    <h2 class='f5 mt3 mb4'>
+      Authors
+    </h2>
   </div>
   <div class="flex-auto ph4">
-    {{bar-chart}}
+    {{bar-chart data=categoryData}}
+
+    <h2 class='f5 mt3 mb4'>
+      Categories
+    </h2>
   </div>
   <div class="flex-auto ph4">
-    {{bar-chart}}
+    {{bar-chart data=commentsData}}
+
+    <h2 class='f5 mt3 mb4'>
+      Comments
+    </h2>
   </div>
 </div>
 
