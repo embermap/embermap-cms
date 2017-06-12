@@ -1,1 +1,16 @@
 <svg width='100%' height='100%'></svg>
+
+{{#if tooltipTarget}}
+  {{#modal-dialog
+    tetherTarget=tooltipTarget
+    targetAttachment='top middle'
+    attachment='bottom middle'
+    offset='14px 0'}}
+
+    <div class='bg-black white f7 pa2 o-80'>
+      <p>{{hoveredLabel}}</p>
+    </div>
+    <div class="tooltip-arrow"></div>
+
+  {{/modal-dialog}}
+{{/if}}
