@@ -26,6 +26,9 @@ module.exports = function(environment) {
 
     'ember-cli-mirage': {
       discoverEmberDataModels: true
+    },
+    'ember-component-css': {
+      namespacing: false
     }
   };
 
