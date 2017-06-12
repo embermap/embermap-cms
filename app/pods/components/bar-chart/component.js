@@ -6,6 +6,12 @@ export default Ember.Component.extend({
 
   data: [],
 
+  tooltipTarget: Ember.computed('hoveredLabel', function() {
+    return select(this.$('svg')[0]).selectAll('rect')
+      .filter(data => data.label === this.get('hoveredLabel'))
+      .node();
+  }),
+
   didInsertElement() {
     let counts = this.get('data').map(data => data.count);
     let yScale = scaleLinear()
@@ -25,7 +31,13 @@ export default Ember.Component.extend({
       .attr('width', `${xScale.bandwidth()}%`)
       .attr('height', data => `${yScale(data.count)}%`)
       .attr('x', data => `${xScale(data.label)}%`)
-      .attr('y', data => `${100 - yScale(data.count)}%`);
+      .attr('y', data => `${100 - yScale(data.count)}%`)
+      .on('mouseover', data => {
+        this.set('hoveredLabel', data.label);
+      })
+      .on('mouseout', () => {
+        this.set('hoveredLabel', null);
+      });
   }
 
 });
