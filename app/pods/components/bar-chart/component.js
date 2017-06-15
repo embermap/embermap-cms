@@ -2,9 +2,16 @@ import Ember from 'ember';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleBand } from 'd3-scale';
 
+const COLORS = {
+  blue: [ '#bbdefb' , '#2196f3' ],
+  green: [ '#c8e6c9', '#4caf50' ],
+  red: [ '#ffcdd2', '#f44336' ]
+};
+
 export default Ember.Component.extend({
 
   data: [],
+  color: 'blue',
 
   tooltipTarget: Ember.computed('hoveredLabel', function() {
     return select(this.$('svg')[0]).selectAll('rect')
@@ -17,6 +24,10 @@ export default Ember.Component.extend({
     let yScale = scaleLinear()
       .domain([ 0, Math.max(...counts) ])
       .range([ 0, 100 ]);
+
+    let color = scaleLinear()
+      .domain([ 0, Math.max(...counts) ])
+      .range(COLORS[this.get('color')]);
 
     let xScale = scaleBand()
       .domain(this.get('data').map(data => data.label))
@@ -32,6 +43,7 @@ export default Ember.Component.extend({
       .attr('height', data => `${yScale(data.count)}%`)
       .attr('x', data => `${xScale(data.label)}%`)
       .attr('y', data => `${100 - yScale(data.count)}%`)
+      .attr('fill', data => color(data.count))
       .on('mouseover', data => {
         this.set('hoveredLabel', data.label);
       })
