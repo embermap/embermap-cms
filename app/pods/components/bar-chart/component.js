@@ -10,8 +10,8 @@ const COLORS = {
 
 export default Ember.Component.extend({
 
-  data: [],
   color: 'blue',
+  data: [],
 
   tooltipTarget: Ember.computed('hoveredLabel', function() {
     return select(this.$('svg')[0]).selectAll('rect')
