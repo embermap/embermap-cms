@@ -13,9 +13,11 @@ export default Ember.Component.extend({
   color: 'blue',
   data: [],
 
-  tooltipTarget: Ember.computed('hoveredLabel', function() {
+  highlightedLabel: Ember.computed.or('selectedLabel', 'hoveredLabel'),
+
+  tooltipTarget: Ember.computed('didRenderChart', 'highlightedLabel', function() {
     return select(this.$('svg')[0]).selectAll('rect')
-      .filter(data => data.label === this.get('hoveredLabel'))
+      .filter(data => data.label === this.get('highlightedLabel'))
       .node();
   }),
 
@@ -36,20 +38,50 @@ export default Ember.Component.extend({
 
     let svg = select(this.$('svg')[0]);
 
-    svg.selectAll('rect').data(this.get('data'))
+    let bars = svg.selectAll('rect').data(this.get('data'))
       .enter()
       .append('rect')
       .attr('width', `${xScale.bandwidth()}%`)
       .attr('height', data => `${yScale(data.count)}%`)
       .attr('x', data => `${xScale(data.label)}%`)
       .attr('y', data => `${100 - yScale(data.count)}%`)
-      .attr('fill', data => color(data.count))
+      .attr('fill', data => color(data.count));
+
+    bars
       .on('mouseover', data => {
         this.set('hoveredLabel', data.label);
       })
       .on('mouseout', () => {
         this.set('hoveredLabel', null);
+      })
+      .on('click', data => {
+        let clickedLabel = data.label;
+
+        if (clickedLabel === this.get('selectedLabel')) {
+          this.set('selectedLabel', '');
+        } else {
+          this.set('selectedLabel', clickedLabel);
+        }
+
+        this.updateOpacities();
       });
+
+    this.updateOpacities();
+    this.set('didRenderChart', true);
+  },
+
+  updateOpacities() {
+    let bars = select(this.$('svg')[0]).selectAll('rect');
+
+    if (!this.get('selectedLabel')) {
+      bars.attr('opacity', '1.0');
+
+    } else {
+      bars.filter(data => data.label !== this.get('selectedLabel'))
+        .attr('opacity', '0.5');
+      bars.filter(data => data.label === this.get('selectedLabel'))
+        .attr('opacity', '1.0');
+    }
   }
 
 });
