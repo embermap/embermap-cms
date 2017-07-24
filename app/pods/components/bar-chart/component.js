@@ -12,6 +12,7 @@ export default Ember.Component.extend({
 
   color: 'blue',
   data: [],
+  'on-click': null,
 
   highlightedLabel: Ember.computed.or('selectedLabel', 'hoveredLabel'),
 
@@ -57,17 +58,25 @@ export default Ember.Component.extend({
       .on('click', data => {
         let clickedLabel = data.label;
 
-        if (clickedLabel === this.get('selectedLabel')) {
-          this.set('selectedLabel', '');
+        if (this.get('on-click')) {
+          this.get('on-click')(clickedLabel);
         } else {
-          this.set('selectedLabel', clickedLabel);
-        }
+          if (clickedLabel === this.get('selectedLabel')) {
+            this.set('selectedLabel', '');
+          } else {
+            this.set('selectedLabel', clickedLabel);
+          }
 
-        this.updateOpacities();
+          this.updateOpacities();
+        }
       });
 
     this.updateOpacities();
     this.set('didRenderChart', true);
+  },
+
+  didUpdateAttrs() {
+    this.updateOpacities();
   },
 
   updateOpacities() {
