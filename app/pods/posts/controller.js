@@ -3,6 +3,11 @@ import groupBy from 'ember-group-by';
 
 export default Ember.Controller.extend({
 
+  queryParams: ['selectedAuthor', 'selectedCategory', 'selectedPost'],
+  selectedAuthor: null,
+  selectedCategory: null,
+  selectedPost: null,
+
   activeSortBy: 'date',
   postsSorting: Ember.computed('activeSortBy', function() {
     return [ this.get('activeSortBy') ];
@@ -39,6 +44,12 @@ export default Ember.Controller.extend({
       } else {
         this.set('activeSortBy', field);
       }
+    },
+
+    toggleBar(property, label) {
+      let newValue = this.get(property) === label ? null : label;
+
+      this.set(property, newValue);
     }
   }
 

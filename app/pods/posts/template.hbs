@@ -2,21 +2,27 @@
 
 <div class="flex tc">
   <div class="flex-auto ph4">
-    {{bar-chart data=authorData}}
+    {{bar-chart data=authorData
+      selectedLabel=selectedAuthor
+      on-click=(action 'toggleBar' 'selectedAuthor')}}
 
     <h2 class='f5 mt3 mb4'>
       Authors
     </h2>
   </div>
   <div class="flex-auto ph4">
-    {{bar-chart data=categoryData color='green'}}
+    {{bar-chart data=categoryData color='green'
+      selectedLabel=selectedCategory
+      on-click=(action 'toggleBar' 'selectedCategory')}}
 
     <h2 class='f5 mt3 mb4'>
       Categories
     </h2>
   </div>
   <div class="flex-auto ph4">
-    {{bar-chart data=commentsData color='red'}}
+    {{bar-chart data=commentsData color='red'
+      selectedLabel=selectedPost
+      on-click=(action 'toggleBar' 'selectedPost')}}
 
     <h2 class='f5 mt3 mb4'>
       Comments
