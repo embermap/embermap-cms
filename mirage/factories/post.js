@@ -22,7 +22,7 @@ export default Factory.extend({
   },
 
   category() {
-    let x = faker.random.number({ min: 0, max: 10 });
+    let x = faker.random.number({ min: 0, max: 9 });
     let i;
 
     if (x < 4) {
