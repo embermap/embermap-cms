@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
       .filter(post => selectedPost ? post.get('title') === selectedPost : true);
   }),
 
-  postsByAuthor: groupBy('model', 'author'),
+  postsByAuthor: groupBy('posts', 'author'),
   authorData: Ember.computed.map('postsByAuthor', function(group) {
     return {
       label: group.value,

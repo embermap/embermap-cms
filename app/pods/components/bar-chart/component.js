@@ -23,7 +23,19 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement() {
-    let counts = this.get('data').map(data => data.count);
+    this.renderChart();
+    this.updateOpacities();
+    this.set('didRenderChart', true);
+  },
+
+  didUpdateAttrs() {
+    this.renderChart();
+    this.updateOpacities();
+  },
+
+  renderChart() {
+    let data = this.get('data').sortBy('label');
+    let counts = data.map(data => data.count);
     let yScale = scaleLinear()
       .domain([ 0, Math.max(...counts) ])
       .range([ 0, 100 ]);
@@ -33,22 +45,27 @@ export default Ember.Component.extend({
       .range(COLORS[this.get('color')]);
 
     let xScale = scaleBand()
-      .domain(this.get('data').map(data => data.label))
+      .domain(data.map(data => data.label))
       .range([ 0, 100 ])
       .paddingInner(0.12);
 
     let svg = select(this.$('svg')[0]);
 
-    let bars = svg.selectAll('rect').data(this.get('data'))
-      .enter()
-      .append('rect')
+    let barsUpdate = svg.selectAll('rect').data(data);
+    let barsEnter = barsUpdate.enter().append('rect');
+    let barsExit = barsUpdate.exit();
+
+    barsEnter
+      .merge(barsUpdate)
       .attr('width', `${xScale.bandwidth()}%`)
       .attr('height', data => `${yScale(data.count)}%`)
       .attr('x', data => `${xScale(data.label)}%`)
       .attr('y', data => `${100 - yScale(data.count)}%`)
       .attr('fill', data => color(data.count));
 
-    bars
+    barsExit.remove();
+
+    barsEnter
       .on('mouseover', data => {
         this.set('hoveredLabel', data.label);
       })
@@ -71,12 +88,6 @@ export default Ember.Component.extend({
         }
       });
 
-    this.updateOpacities();
-    this.set('didRenderChart', true);
-  },
-
-  didUpdateAttrs() {
-    this.updateOpacities();
   },
 
   updateOpacities() {
