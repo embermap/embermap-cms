@@ -23,45 +23,43 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement() {
+    this.set('yScale', scaleLinear().range([ 0, 100 ]));
+    this.set('colorScale', scaleLinear().range(COLORS[this.get('color')]));
+    this.set('xScale', scaleBand().range([ 0, 100 ]).paddingInner(0.12));
+
     this.renderChart();
-    this.updateOpacities();
     this.set('didRenderChart', true);
   },
 
   didUpdateAttrs() {
     this.renderChart();
-    this.updateOpacities();
   },
 
   renderChart() {
     let data = this.get('data').sortBy('label');
     let counts = data.map(data => data.count);
-    let yScale = scaleLinear()
-      .domain([ 0, Math.max(...counts) ])
-      .range([ 0, 100 ]);
 
-    let color = scaleLinear()
-      .domain([ 0, Math.max(...counts) ])
-      .range(COLORS[this.get('color')]);
-
-    let xScale = scaleBand()
-      .domain(data.map(data => data.label))
-      .range([ 0, 100 ])
-      .paddingInner(0.12);
+    this.get('yScale').domain([ 0, Math.max(...counts) ]);
+    this.get('colorScale').domain([ 0, Math.max(...counts) ]);
+    this.get('xScale').domain(data.map(data => data.label));
 
     let svg = select(this.$('svg')[0]);
-
     let barsUpdate = svg.selectAll('rect').data(data);
     let barsEnter = barsUpdate.enter().append('rect');
     let barsExit = barsUpdate.exit();
 
     barsEnter
       .merge(barsUpdate)
-      .attr('width', `${xScale.bandwidth()}%`)
-      .attr('height', data => `${yScale(data.count)}%`)
-      .attr('x', data => `${xScale(data.label)}%`)
-      .attr('y', data => `${100 - yScale(data.count)}%`)
-      .attr('fill', data => color(data.count));
+      .attr('width', `${this.get('xScale').bandwidth()}%`)
+      .attr('height', data => `${this.get('yScale')(data.count)}%`)
+      .attr('x', data => `${this.get('xScale')(data.label)}%`)
+      .attr('y', data => `${100 - this.get('yScale')(data.count)}%`)
+      .attr('fill', data => this.get('colorScale')(data.count))
+      .attr('opacity', data => {
+        let selected = this.get('selectedLabel');
+
+        return (selected && data.label !== selected) ? '0.5' : '1.0';
+      });
 
     barsExit.remove();
 
@@ -84,24 +82,9 @@ export default Ember.Component.extend({
             this.set('selectedLabel', clickedLabel);
           }
 
-          this.updateOpacities();
+          this.renderChart();
         }
       });
-
-  },
-
-  updateOpacities() {
-    let bars = select(this.$('svg')[0]).selectAll('rect');
-
-    if (!this.get('selectedLabel')) {
-      bars.attr('opacity', '1.0');
-
-    } else {
-      bars.filter(data => data.label !== this.get('selectedLabel'))
-        .attr('opacity', '0.5');
-      bars.filter(data => data.label === this.get('selectedLabel'))
-        .attr('opacity', '1.0');
-    }
   }
 
 });
