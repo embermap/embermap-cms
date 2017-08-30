@@ -1,6 +1,8 @@
+/* global Tether */
 import Ember from 'ember';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleBand } from 'd3-scale';
+import 'd3-transition';
 
 const COLORS = {
   blue: [ '#bbdefb' , '#2196f3' ],
@@ -44,12 +46,16 @@ export default Ember.Component.extend({
     this.get('xScale').domain(data.map(data => data.label));
 
     let svg = select(this.$('svg')[0]);
-    let barsUpdate = svg.selectAll('rect').data(data);
-    let barsEnter = barsUpdate.enter().append('rect');
+    let barsUpdate = svg.selectAll('rect').data(data, data => data.label);
+    let barsEnter = barsUpdate.enter()
+      .append('rect')
+      .attr('opacity', 0);
     let barsExit = barsUpdate.exit();
 
+    let rafId;
     barsEnter
       .merge(barsUpdate)
+      .transition()
       .attr('width', `${this.get('xScale').bandwidth()}%`)
       .attr('height', data => `${this.get('yScale')(data.count)}%`)
       .attr('x', data => `${this.get('xScale')(data.label)}%`)
@@ -59,9 +65,25 @@ export default Ember.Component.extend({
         let selected = this.get('selectedLabel');
 
         return (selected && data.label !== selected) ? '0.5' : '1.0';
+      })
+      .on('start', (data, index) => {
+        if (index === 0) {
+          (function updateTether() {
+            Tether.position()
+            rafId = requestAnimationFrame(updateTether);
+          })();
+        }
+      })
+      .on('end interrupt', (data, index) => {
+        if (index === 0) {
+          cancelAnimationFrame(rafId);
+        }
       });
 
-    barsExit.remove();
+    barsExit
+      .transition()
+      .attr('opacity', 0)
+      .remove();
 
     barsEnter
       .on('mouseover', data => {

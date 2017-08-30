@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
     };
   }),
 
-  postsByCategory: groupBy('model', 'category'),
+  postsByCategory: groupBy('posts', 'category'),
   categoryData: Ember.computed.map('postsByCategory', function(group) {
     return {
       label: group.value,
@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
     };
   }),
 
-  commentsData: Ember.computed.map('model', function(post) {
+  commentsData: Ember.computed.map('posts', function(post) {
     return {
       label: post.get('title'),
       count: post.get('commentCount')
