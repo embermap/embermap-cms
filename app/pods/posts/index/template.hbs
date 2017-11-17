@@ -53,10 +53,14 @@
   <tbody>
     {{#each posts as |post|}}
       <tr>
-        <td>{{post.title}}</td>
+        <td>
+          {{#link-to 'posts.post' post class='link dark-gray dim'}}
+            {{post.title}}
+          {{/link-to}}
+        </td>
         <td>{{post.author}}</td>
         <td>{{post.category}}</td>
-        <td>{{post.commentCount}}</td>
+        <td>{{post.comments.length}}</td>
         <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
       </tr>
     {{/each}}

@@ -4,6 +4,7 @@ export default DS.Model.extend({
 
   post: DS.belongsTo(),
 
-  text: DS.attr()
+  text: DS.attr(),
+  author: DS.attr()
 
 });

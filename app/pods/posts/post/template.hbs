@@ -1,0 +1,28 @@
+{{#link-to 'posts' class='link dark-gray dim'}}
+  &lt; Back to all posts
+{{/link-to}}
+
+<h1>{{model.title}}</h1>
+
+<div class='lh-copy'>
+  {{{model.text}}}
+</div>
+
+<h2>
+  Comments
+  {{#if model.comments.length}}
+    ({{model.comments.length}})
+  {{/if}}
+</h2>
+
+<div class='lh-copy'>
+  {{#if model.comments}}
+    <ul>
+      {{#each model.comments as |comment|}}
+        <li>&middot; {{comment.text}} <em class='i'>– {{comment.author}}</em></li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>This post has no comments.</p>
+  {{/if}}
+</div>

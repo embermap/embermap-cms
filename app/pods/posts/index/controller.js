@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
   commentsData: Ember.computed.map('posts', function(post) {
     return {
       label: post.get('title'),
-      count: post.get('commentCount')
+      count: post.get('comments.length')
     };
   }),
 

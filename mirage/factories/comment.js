@@ -3,7 +3,11 @@ import { Factory, faker } from 'ember-cli-mirage';
 export default Factory.extend({
 
   text() {
-    return faker.lorem.paragraphs(2);
+    return faker.lorem.sentences(2);
+  },
+
+  author() {
+    return faker.name.findName();
   }
 
 });
