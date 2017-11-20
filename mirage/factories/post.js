@@ -3,8 +3,7 @@ import { Factory, faker } from 'ember-cli-mirage';
 export default Factory.extend({
 
   title() {
-    let title = faker.lorem.words(3);
-    return title[0].toUpperCase() + title.substr(1);
+    return faker.company.catchPhrase();
   },
 
   text() {

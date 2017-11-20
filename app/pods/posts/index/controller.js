@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   selectedCategory: null,
   selectedPost: null,
 
-  activeSortBy: 'date',
+  activeSortBy: 'id',
   postsSorting: Ember.computed('activeSortBy', function() {
     return [ this.get('activeSortBy') ];
   }),

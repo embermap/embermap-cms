@@ -7,17 +7,17 @@ export default function(server) {
     category: 'Literature'
   });
 
-  // Create a post with comments
-  let post = server.create('post');
-  server.createList('comment', 3, {
-    post
-  });
-
   // Create a long post
   server.create('post', {
     author: 'Jane Doe',
     title: 'A very long post',
     text: faker.lorem.paragraphs(30).split('\n').join('\n<br /><br />')
+  });
+
+  // Create a post with comments
+  let post = server.create('post');
+  server.createList('comment', 3, {
+    post
   });
 
 }
