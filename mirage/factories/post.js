@@ -1,4 +1,4 @@
-import { Factory, faker } from 'ember-cli-mirage';
+import { Factory, trait, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
 
@@ -22,6 +22,22 @@ export default Factory.extend({
 
   date() {
     return faker.date.past();
-  }
+  },
+
+  long: trait({
+    title(i) {
+      return `Long post #${i}`;
+    },
+
+    text: faker.lorem.paragraphs(30).split('\n').join('\n<br /><br />')
+  }),
+
+  withComments: trait({
+    afterCreate(post, server) {
+      server.createList('comment', 3, {
+        post
+      });
+    }
+  })
 
 });

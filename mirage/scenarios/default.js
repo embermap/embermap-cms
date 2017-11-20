@@ -1,5 +1,3 @@
-import { faker } from 'ember-cli-mirage';
-
 export default function(server) {
 
   server.createList('post', 3, {
@@ -7,17 +5,10 @@ export default function(server) {
     category: 'Literature'
   });
 
-  // Create a long post
-  server.create('post', {
-    author: 'Jane Doe',
-    title: 'A very long post',
-    text: faker.lorem.paragraphs(30).split('\n').join('\n<br /><br />')
+  server.createList('post', 3, 'long', {
+    author: 'Jane Doe'
   });
 
-  // Create a post with comments
-  let post = server.create('post');
-  server.createList('comment', 3, {
-    post
-  });
-
+  server.create('post', 'withComments');
+  server.create('post', 'long', 'withComments');
 }
