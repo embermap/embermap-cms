@@ -6,7 +6,6 @@ import { keyUp } from 'ember-keyboard';
 export default Ember.Controller.extend(EKMixin, {
 
   reloadPosts: Ember.on(keyUp('KeyR'), function() {
-    console.log('`KeyR` was pressed');
     this.set('isLoading', true);
 
     Ember.run.later(() => {
