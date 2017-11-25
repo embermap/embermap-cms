@@ -11,4 +11,16 @@ export default function(server) {
 
   server.create('post', 'withComments');
   server.create('post', 'long', 'withComments');
+
+  let city = server.create('album', {
+    title: 'City living',
+    slug: 'city-living'
+  });
+  server.create('image', {
+    album: city,
+    title: 'A picture',
+    slug: 'a-picture',
+    url: 'http://lorempixel.com/200/200/city/1'
+  });
+
 }

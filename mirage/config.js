@@ -7,4 +7,5 @@ export default function() {
   // this.timing = 1;
 
   this.resource('posts');
+  this.resource('albums');
 }

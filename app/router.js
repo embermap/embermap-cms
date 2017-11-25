@@ -11,7 +11,9 @@ Router.map(function() {
   this.route('posts', function() {
     this.route('post', { path: '/:post_id' });
   });
-  this.route('media');
+  this.route('media', function() {
+    this.route('album', { path: '/albums/:album_slug' });
+  });
   this.route('comments');
 });
 
