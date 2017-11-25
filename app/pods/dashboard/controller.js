@@ -1,14 +1,16 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
+import { on } from '@ember/object/evented';
+import Controller from '@ember/controller';
 import { EKMixin } from 'ember-keyboard';
 import { keyUp } from 'ember-keyboard';
 
 
-export default Ember.Controller.extend(EKMixin, {
+export default Controller.extend(EKMixin, {
 
-  reloadPosts: Ember.on(keyUp('KeyR'), function() {
+  reloadPosts: on(keyUp('KeyR'), function() {
     this.set('isLoading', true);
 
-    Ember.run.later(() => {
+    later(() => {
       this.set('isLoading', false);
     }, 2000);
   }),

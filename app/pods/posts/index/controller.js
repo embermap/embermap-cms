@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import { sort, map } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 import groupBy from 'ember-group-by';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   queryParams: ['selectedAuthor', 'selectedCategory', 'selectedPost'],
   selectedAuthor: null,
@@ -9,12 +11,12 @@ export default Ember.Controller.extend({
   selectedPost: null,
 
   activeSortBy: 'id',
-  postsSorting: Ember.computed('activeSortBy', function() {
+  postsSorting: computed('activeSortBy', function() {
     return [ this.get('activeSortBy') ];
   }),
-  sortedPosts: Ember.computed.sort('model', 'postsSorting'),
+  sortedPosts: sort('model', 'postsSorting'),
 
-  posts: Ember.computed('sortedPosts.[]', 'selectedAuthor', 'selectedCategory', 'selectedPost', function() {
+  posts: computed('sortedPosts.[]', 'selectedAuthor', 'selectedCategory', 'selectedPost', function() {
     let selectedAuthor = this.get('selectedAuthor');
     let selectedCategory = this.get('selectedCategory');
     let selectedPost = this.get('selectedPost');
@@ -26,7 +28,7 @@ export default Ember.Controller.extend({
   }),
 
   postsByAuthor: groupBy('posts', 'author'),
-  authorData: Ember.computed.map('postsByAuthor', function(group) {
+  authorData: map('postsByAuthor', function(group) {
     return {
       label: group.value,
       count: group.items.length
@@ -34,14 +36,14 @@ export default Ember.Controller.extend({
   }),
 
   postsByCategory: groupBy('posts', 'category'),
-  categoryData: Ember.computed.map('postsByCategory', function(group) {
+  categoryData: map('postsByCategory', function(group) {
     return {
       label: group.value,
       count: group.items.length
     };
   }),
 
-  commentsData: Ember.computed.map('posts', function(post) {
+  commentsData: map('posts', function(post) {
     return {
       label: post.get('title'),
       count: post.get('comments.length')

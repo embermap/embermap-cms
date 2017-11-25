@@ -1,5 +1,8 @@
 /* global Tether */
-import Ember from 'ember';
+import { computed } from '@ember/object';
+
+import { or } from '@ember/object/computed';
+import Component from '@ember/component';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import 'd3-transition';
@@ -10,15 +13,15 @@ const COLORS = {
   red: [ '#ffcdd2', '#f44336' ]
 };
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   color: 'blue',
   data: [],
   'on-click': null,
 
-  highlightedLabel: Ember.computed.or('selectedLabel', 'hoveredLabel'),
+  highlightedLabel: or('selectedLabel', 'hoveredLabel'),
 
-  tooltipTarget: Ember.computed('didRenderChart', 'highlightedLabel', function() {
+  tooltipTarget: computed('didRenderChart', 'highlightedLabel', function() {
     return select(this.$('svg')[0]).selectAll('rect')
       .filter(data => data.label === this.get('highlightedLabel'))
       .node();
