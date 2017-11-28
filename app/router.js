@@ -12,7 +12,9 @@ Router.map(function() {
     this.route('post', { path: '/:post_id' });
   });
   this.route('media', function() {
-    this.route('album', { path: '/albums/:album_slug' });
+    this.route('album', { path: '/albums/:album_slug' }, function() {
+      this.route('image', { path: '/:image_slug' });
+    });
   });
   this.route('comments');
 });

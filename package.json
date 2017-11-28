@@ -35,6 +35,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
     "ember-component-css": "^0.3.4",
+    "ember-composable-helpers": "^2.0.3",
     "ember-d3": "^0.3.3",
     "ember-data": "~2.16.2",
     "ember-export-application-global": "^2.0.0",

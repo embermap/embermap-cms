@@ -1,0 +1,13 @@
+{{#link-to 'media' class='link dark-gray dim'}}
+  &lt; All albums
+{{/link-to}}
+
+<h1>{{model.title}}</h1>
+
+<div class="flex">
+  {{#each model.images as |image|}}
+    {{#link-to 'media.album.image' image}}
+      <img src={{image.url}} class='w4 h4 mr4'>
+    {{/link-to}}
+  {{/each}}
+</div>

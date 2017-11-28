@@ -1,8 +1,8 @@
 <h1>Albums</h1>
 
 <div class="flex">
-  {{#each model as |album|}}
-    {{#link-to 'media.album' album.slug class='db w4 mr3 link gray hover'}}
+  {{#each (sort-by 'id' model) as |album|}}
+    {{#link-to 'media.album' album class='db w4 mr3 link gray dim'}}
       <img src={{album.images.firstObject.url}}
         class='w4 h4 br2 ba b--moon-gray'>
       <p class='pv2 tc lh-copy'>{{album.title}}</p>
