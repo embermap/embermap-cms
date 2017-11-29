@@ -20,7 +20,7 @@ export default Route.extend({
           include: 'images'
         })
         .then(albums => {
-          this.store.set(`meta.album.${slug}`, true);
+          this.set(`store.meta.album.${slug}`, true);
 
           return albums.get('firstObject')
         });
