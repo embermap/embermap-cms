@@ -6,7 +6,7 @@ export default DS.Store.extend({
     this._super(...arguments);
 
     this.set('meta', {
-      albums: false,
+      albums: {},
       album: {}
     });
   },
