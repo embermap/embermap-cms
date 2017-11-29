@@ -5,10 +5,10 @@ export default Route.extend({
   model() {
     if (this.store.get('meta.albums.hasLoadedAll')) {
       return this.store.peekAll('album');
-      
+
     } else {
       return this.store
-        .findAll('album', { include: 'images' })
+        .findAll('album', { include: 'images', reload: true })
         .then(albums => {
           this.store.set('meta.albums.hasLoadedAll', true);
 
