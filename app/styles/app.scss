@@ -96,3 +96,7 @@ td {
 tbody tr:nth-child(even) {
   background: rgb(250,250,250);
 }
+
+.link:focus {
+  outline: none;
+}

@@ -1,0 +1,23 @@
+<div class="flex items-center mb4">
+  <h1 class='mt0 mb0 dib mr3'>Photo styles</h1>
+
+  {{#link-to 'media.styles.style' 'light'
+    class='flex link b silver pb2 mr3 bb bw1 b--transparent'
+    activeClass='b--inherit'}}
+    <div class='dib w1 h1 mr2 bg-light-silver'></div>
+    <p class='dib ma0 f6'>
+      LIGHT
+    </p>
+  {{/link-to}}
+
+  {{#link-to 'media.styles.style' 'dark'
+    class='flex link b near-black pb2 bb bw1 b--transparent'
+    activeClass='b--inherit'}}
+    <div class='dib w1 h1 mr2 bg-near-black'></div>
+    <p class='dib ma0 f6'>
+      DARK
+    </p>
+  {{/link-to}}
+</div>
+
+{{outlet}}

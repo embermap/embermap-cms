@@ -12,8 +12,14 @@ Router.map(function() {
     this.route('post', { path: '/:post_id' });
   });
   this.route('media', function() {
-    this.route('album', { path: '/albums/:album_slug' }, function() {
-      this.route('image', { path: '/:image_slug' });
+    this.route('styles', function() {
+      this.route('style', { path: '/:style' });
+    });
+
+    this.route('albums', function() {
+      this.route('album', { path: '/:album_slug' }, function() {
+        this.route('image', { path: '/:image_slug' });
+      });
     });
   });
   this.route('comments');

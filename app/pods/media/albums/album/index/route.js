@@ -2,13 +2,13 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
 
-  cache: {},
-
   // GET /albums?filter[slug]=my-album
   model() {
-    let slug = this.paramsFor('media.album').album_slug;
+    let slug = this.paramsFor('media.albums.album').album_slug;
+    let hasLoadedAllAlbums = this.store.get(`meta.albums.hasLoadedAll`)
+    let hasLoadedAlbum = this.store.get(`meta.album.${slug}`)
 
-    if (this.get(`cache.${slug}`)) {
+    if (hasLoadedAllAlbums || hasLoadedAlbum) {
       return this.store
         .peekAll('album')
         .filterBy('slug', slug)[0];
@@ -20,7 +20,7 @@ export default Route.extend({
           include: 'images'
         })
         .then(albums => {
-          this.set(`cache.${slug}`, true);
+          this.store.set(`meta.album.${slug}`, true);
 
           return albums.get('firstObject')
         });
