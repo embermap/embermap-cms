@@ -19,10 +19,10 @@ function filterable(resourceName, attrs) {
 }
 
 export default function() {
-  window.server = this;
-
   this.resource('posts');
+  this.resource('tags');
 
   this.get('albums', filterable('albums', [ 'slug' ]));
   this.get('images', filterable('images', [ 'slug', 'style' ]));
+  this.get('tags', filterable('tags', [ 'slug' ]));
 }

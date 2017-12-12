@@ -11,6 +11,10 @@ Router.map(function() {
   this.route('posts', function() {
     this.route('post', { path: '/:post_id' });
   });
+  this.route('tags', function() {
+    this.route('tag', { path: '/:tag_slug' });
+  });
+
   this.route('media', function() {
     this.route('styles', function() {
       this.route('style', { path: '/:style' });

@@ -65,13 +65,13 @@ h2 {
 table {
   @extend .w-100;
   @extend .mt4;
-  border: 1px solid #ddd;
+  // border: 1px solid #ddd;
 }
 
-thead a {
+thead, thead a {
+  font-weight: bold;
   text-decoration: none;
   color: #333;
-  font-weight: bold;
 }
 
 th {
@@ -90,13 +90,39 @@ th:nth-child(4) { width: 15%; }
 th:nth-child(5) { width: 15%; }
 
 td {
-  border-top: 1px solid #ddd;
+  // border-top: 1px solid #ddd;
 }
 
-tbody tr:nth-child(even) {
+tbody tr:hover {
   background: rgb(250,250,250);
+}
+
+.transition {
+  transition: all 0.15s;
+}
+
+// tbody tr:nth-child(even) {
+//   background: rgb(250,250,250);
+// }
+
+.link,
+.link:link,
+.link:hover,
+.link:focus, {
+  &, * {
+    transition: none;
+  }
 }
 
 .link:focus {
   outline: none;
+}
+
+.f8 {
+  font-size: 10px;
+}
+
+.bullets {
+  list-style: disc;
+  margin-left: 30px;
 }

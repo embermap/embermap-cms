@@ -1,16 +1,42 @@
 export default function(server) {
+  window.server = server;
 
-  server.createList('post', 3, {
-    author: 'John Smith',
-    category: 'Literature'
+  let javascript = server.create('tag', {
+    name: 'JavaScript',
+    slug: 'javascript'
+  });
+  let css = server.create('tag', {
+    name: 'CSS',
+    slug: 'css'
+  });
+  let opinion = server.create('tag', {
+    name: 'Opinion',
+    slug: 'opinion'
   });
 
-  server.createList('post', 3, 'long', {
-    author: 'Jane Doe'
+  server.create('post', {
+    title: 'Top 10 JavaScript libraries to learn',
+    tags: [ javascript, opinion ]
+  });
+  server.create('post', {
+    title: "Why Silicon Valley needs South Dakota",
+    tags: [ opinion ]
+  });
+  server.create('post', {
+    title: "Mastering the Grid",
+    tags: [ css ]
   });
 
-  server.create('post', 'withComments');
-  server.create('post', 'long', 'withComments');
+  // server.createList('post', 3, {
+  //   author: 'John Smith',
+  //   category: 'Literature'
+  // });
+  //
+  // server.createList('post', 3, 'long', {
+  //   author: 'Jane Doe'
+  // });
+  //
+  // server.create('post', 'withComments'); server.create('post', 'long', 'withComments');
 
   let city = server.create('album', {
     title: 'City living',

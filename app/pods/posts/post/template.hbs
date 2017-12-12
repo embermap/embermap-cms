@@ -1,8 +1,27 @@
-{{#link-to 'posts' class='link dark-gray dim'}}
-  &lt; Back to all posts
-{{/link-to}}
+<div class="f7">
+  {{#link-to 'posts' class='link silver ttu dim'}}
+    Blog posts
+  {{/link-to}}
+  <span class='moon-gray'>
+    &nbsp;/&nbsp;
+  </span>
+</div>
 
 <h1>{{model.title}}</h1>
+
+<div class="flex mb3 items-center">
+  <p class='mr3'>
+    Tags:
+  </p>
+
+  {{tag-list tags=model.tags}}
+
+  <span class='ml2'>
+    <a class='link silver br1 f7 dib flex items-center justify-center w2 h2 hover-bg-light-gray hover-near-black' href="">
+      {{fa-icon 'pencil'}}
+    </a>
+  </span>
+</div>
 
 <div class='lh-copy'>
   {{{model.text}}}
