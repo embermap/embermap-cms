@@ -1,0 +1,36 @@
+{{#modal-dialog
+  onClose=onClose
+  hasOverlay=false
+  targetAttachment='bottom left'
+  offset='-5px 0'
+  attachment='top left'
+  clickOutsideToClose=true
+  tetherTarget='[data-modal-attach-id="tag-list"]'}}
+  <div class='bg-white shadow-3 pa3 w5'>
+    <div class="flex pb3 mb2 bb b--light-gray">
+      <p class='gray f6'>Tags</p>
+      <a {{action onClose}} href='#' class="mla link gray f4 o-50 glow">
+        &times;
+      </a>
+    </div>
+
+    <ul class={{if toggleTag.isRunning 'o-50 no-events'}}>
+      {{#each tags as |tag|}}
+        <li>
+          <a {{action (perform toggleTag tag)}}
+            href="#"
+            class='flex items-center link gray pa2 br2 hover-bg-near-white mb2'>
+            <span>
+              {{tag.name}}
+            </span>
+            <span class='mla f6'>
+              {{#if (contains tag post.tags)}}
+                {{fa-icon 'check'}}
+              {{/if}}
+            </span>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+{{/modal-dialog}}

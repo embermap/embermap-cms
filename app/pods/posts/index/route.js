@@ -3,7 +3,7 @@ import Route from '@ember/routing/route';
 export default Route.extend({
 
   model() {
-    return this.get('storefront').loadAll('post', {
+    return this.get('storefront').findAll('post', {
       include: 'comments,tags'
     });
   }

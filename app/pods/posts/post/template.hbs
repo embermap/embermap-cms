@@ -10,17 +10,20 @@
 <h1>{{model.title}}</h1>
 
 <div class="flex mb3 items-center">
-  <p class='mr3'>
+  <p class='mr1'>
     Tags:
   </p>
 
-  {{tag-list tags=model.tags}}
-
-  <span class='ml2'>
-    <a class='link silver br1 f7 dib flex items-center justify-center w2 h2 hover-bg-light-gray hover-near-black' href="">
+  <span class='mr2'>
+    <a {{action (toggle 'isEditingTags' this)}}
+      class='link silver br1 f7 dib flex items-center justify-center w2 h2 hover-near-black'
+      href="#"
+      data-modal-attach-id='tag-list'>
       {{fa-icon 'pencil'}}
     </a>
   </span>
+
+  {{tag-list tags=model.tags}}
 </div>
 
 <div class='lh-copy'>
@@ -45,3 +48,9 @@
     <p>This post has no comments.</p>
   {{/if}}
 </div>
+
+{{#if isEditingTags}}
+  {{posts/post/components/tag-dialog
+    post=model
+    onClose=(action (toggle 'isEditingTags' this))}}
+{{/if}}

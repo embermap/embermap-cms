@@ -21,7 +21,7 @@ export default Factory.extend({
   },
 
   date() {
-    return faker.date.past();
+    return faker.date.past().toISOString();
   },
 
   long: trait({
