@@ -2,8 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
 
-  comments: DS.hasMany({ async: false }),
-  tags: DS.hasMany({ async: false }),
+  comments: DS.hasMany(),
 
   title: DS.attr(),
   text: DS.attr(),

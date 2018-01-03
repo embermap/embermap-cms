@@ -48,12 +48,6 @@
         <th>
           Tags
         </th>
-        {{!-- <th>
-          <a href="" {{action 'sort' 'category'}}>Category</a>
-        </th>
-        <th>
-          <a href="" {{action 'sort' 'commentCount'}}>Comments</a>
-        </th> --}}
       </tr>
     </thead>
     <tbody>
@@ -66,9 +60,7 @@
           </td>
           <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
           <td>{{post.author}}</td>
-          <td>{{tag-list tags=post.tags}}</td>
-          {{!-- <td>{{post.category}}</td>
-          <td>{{post.comments.length}}</td> --}}
+          <td></td>
         </tr>
       {{/each}}
     </tbody>
