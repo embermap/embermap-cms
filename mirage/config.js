@@ -19,6 +19,8 @@ function filterable(resourceName, attrs) {
 }
 
 export default function() {
+  this.timing = 20;
+  
   this.resource('posts');
   this.resource('tags');
 
