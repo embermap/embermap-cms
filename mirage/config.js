@@ -25,5 +25,4 @@ export default function() {
   this.get('albums', filterable('albums', [ 'slug' ]));
   this.get('images', filterable('images', [ 'slug', 'style' ]));
   this.get('tags', filterable('tags', [ 'slug' ]));
-  // this.get('tags');
 }
