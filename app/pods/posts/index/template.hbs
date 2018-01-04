@@ -60,7 +60,7 @@
           </td>
           <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
           <td>{{post.author}}</td>
-          <td></td>
+          <td>{{tag-list tags=post.tags}}</td>
         </tr>
       {{/each}}
     </tbody>

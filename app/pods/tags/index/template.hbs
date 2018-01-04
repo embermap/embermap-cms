@@ -1,1 +1,9 @@
 <h1>Tags</h1>
+
+<ul class="bullets">
+  {{#each model as |tag|}}
+    <li class="mb2">
+      {{tag.name}} ({{tag.posts.length}} posts)
+    </li>
+  {{/each}}
+</ul>

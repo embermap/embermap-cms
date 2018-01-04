@@ -1,16 +1,31 @@
 export default function(server) {
   window.server = server;
 
-  server.create('post', {
-    title: 'Top 10 JavaScript libraries to learn'
+  let javascript = server.create('tag', {
+    name: 'JavaScript',
+    slug: 'javascript'
   });
-  server.create('post', {
-    title: "Why Silicon Valley needs South Dakota"
+  let css = server.create('tag', {
+    name: 'CSS',
+    slug: 'css'
   });
-  server.create('post', {
-    title: "Mastering the Grid"
+  let opinion = server.create('tag', {
+    name: 'Opinion',
+    slug: 'opinion'
   });
 
+  server.create('post', {
+    title: 'Top 10 JavaScript libraries to learn',
+    tags: [ javascript, opinion ]
+  });
+  server.create('post', {
+    title: "Why Silicon Valley needs South Dakota",
+    tags: [ opinion ]
+  });
+  server.create('post', {
+    title: "Mastering the Grid",
+    tags: [ css ]
+  });
 
   // Media data creation
   let city = server.create('album', {

@@ -4,7 +4,7 @@ export default Route.extend({
 
   model() {
     return this.get('store').findAll('post', {
-      include: 'comments'
+      include: 'comments,tags'
     });
   }
 
