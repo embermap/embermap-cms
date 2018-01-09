@@ -13,15 +13,6 @@
     {{/card.header}}
 
     {{#card.body}}
-      {{#ui-selectable-list as |list|}}
-        {{#each tags as |tag|}}
-          {{#list.item
-            onClick=(perform toggleTag tag)
-            selected=(contains tag post.tags)}}
-            {{tag.name}}
-          {{/list.item}}
-        {{/each}}
-      {{/ui-selectable-list}}
     {{/card.body}}
   {{/ui-card}}
 
