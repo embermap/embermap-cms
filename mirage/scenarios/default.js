@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function(server) {
   window.server = server;
 
@@ -14,9 +16,19 @@ export default function(server) {
     slug: 'opinion'
   });
 
-  server.create('post', {
+  server.create('post', 'withComments', {
     title: 'Top 10 JavaScript libraries to learn',
-    tags: [ javascript, opinion ]
+    tags: [ javascript, opinion ],
+    activities: [
+      server.create('activity', {
+        text: 'The JavaScript tag was added',
+        createdAt: moment().subtract(7, 'days').toISOString()
+      }),
+      server.create('activity', {
+        text: 'The Opinion tag was added',
+        createdAt: moment().subtract(3, 'day').toISOString()
+      }),
+    ]
   });
   server.create('post', {
     title: "Why Silicon Valley needs South Dakota",

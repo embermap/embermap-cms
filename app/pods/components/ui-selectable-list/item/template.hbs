@@ -1,0 +1,14 @@
+<li>
+  <a {{action onClick}}
+    href="#"
+    class='flex items-center link gray pa2 br2 hover-bg-near-white mb2'>
+    <span>
+      {{yield}}
+    </span>
+    <span class='mla f6'>
+      {{#if selected}}
+        {{fa-icon 'check'}}
+      {{/if}}
+    </span>
+  </a>
+</li>

@@ -7,3 +7,15 @@
     /
   </span>
 </div>
+
+<h1><strong>{{model.name}}</strong> posts</h1>
+
+<ul class='bullets'>
+  {{#each (sort-by 'date' model.posts) as |post|}}
+    <li class='mb2'>
+      {{#link-to 'posts.post' post.id class='link near-black dim'}}
+        <em class='i'>{{post.title}}</em> by {{post.author}}
+      {{/link-to}}
+    </li>
+  {{/each}}
+</ul>

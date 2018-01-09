@@ -4,6 +4,7 @@ export default DS.Model.extend({
 
   comments: DS.hasMany(),
   tags: DS.hasMany(),
+  activities: DS.hasMany(),
 
   title: DS.attr(),
   text: DS.attr(),

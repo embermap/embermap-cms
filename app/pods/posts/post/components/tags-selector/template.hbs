@@ -1,0 +1,28 @@
+{{#modal-dialog
+  onClose=onClose
+  hasOverlay=false
+  targetAttachment='bottom left'
+  offset='-5px 0'
+  attachment='top left'
+  clickOutsideToClose=true
+  tetherTarget='[data-modal-attach-id="tag-list"]'}}
+
+  {{#ui-card as |card|}}
+    {{#card.header onClose=onClose}}
+      Tags
+    {{/card.header}}
+
+    {{#card.body}}
+      {{#ui-selectable-list as |list|}}
+        {{#each tags as |tag|}}
+          {{#list.item
+            onClick=(perform toggleTag tag)
+            selected=(contains tag post.tags)}}
+            {{tag.name}}
+          {{/list.item}}
+        {{/each}}
+      {{/ui-selectable-list}}
+    {{/card.body}}
+  {{/ui-card}}
+
+{{/modal-dialog}}

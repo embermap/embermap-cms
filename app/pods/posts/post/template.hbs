@@ -26,8 +26,26 @@
   {{tag-list tags=model.tags}}
 </div>
 
+<hr class='bt-0 mv3'>
+
 <div class='lh-copy'>
   {{{model.text}}}
+</div>
+
+<h2>
+  Activity
+</h2>
+
+<div class="lh-copy">
+  <ul>
+    {{#each (sort-by 'createdAt:desc' model.activities) as |activity|}}
+      <li>
+        &middot;
+        {{activity.text}}
+        <span class='pl2 silver'>{{moment-from-now activity.createdAt}}</span>
+      </li>
+    {{/each}}
+  </ul>
 </div>
 
 <h2>
@@ -50,7 +68,7 @@
 </div>
 
 {{#if isEditingTags}}
-  {{posts/post/components/tag-dialog
+  {{posts/post/components/tags-selector
     post=model
     onClose=(action (toggle 'isEditingTags' this))}}
 {{/if}}
