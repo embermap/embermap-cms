@@ -54,7 +54,7 @@
       {{#each posts as |post|}}
         <tr>
           <td>
-            {{#link-to 'posts.post' post class='link dark-gray dim'}}
+            {{#link-to 'posts.post' post.id class='link dark-gray dim'}}
               {{post.title}}
             {{/link-to}}
           </td>
