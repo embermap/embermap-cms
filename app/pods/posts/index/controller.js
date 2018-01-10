@@ -46,7 +46,7 @@ export default Controller.extend({
   commentsData: map('posts', function(post) {
     return {
       label: post.get('title'),
-      count: post.get('comments.length')
+      count: post.get('commentsCount')
     };
   }),
 

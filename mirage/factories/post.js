@@ -24,6 +24,10 @@ export default Factory.extend({
     return faker.date.past().toISOString();
   },
 
+  commentsCount() {
+    return faker.random.number({ min: 0, max: 13 });
+  },
+
   long: trait({
     title(i) {
       return `Long post #${i}`;

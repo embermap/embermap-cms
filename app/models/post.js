@@ -11,5 +11,6 @@ export default DS.Model.extend({
   author: DS.attr(),
   category: DS.attr(),
   date: DS.attr(),
+  commentsCount: DS.attr(),
 
 });
