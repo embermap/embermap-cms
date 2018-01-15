@@ -8,9 +8,11 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('dashboard', { path: '/' });
+  
   this.route('posts', function() {
     this.route('post', { path: '/:post_id' });
   });
+
   this.route('tags', function() {
     this.route('tag', { path: '/:tag_slug' });
   });
@@ -26,7 +28,10 @@ Router.map(function() {
       });
     });
   });
+
   this.route('comments');
+
+  this.route('d3-playground');
 });
 
 export default Router;
