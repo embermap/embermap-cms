@@ -1,68 +1,70 @@
 <h1>Blog posts</h1>
 
-<div class="flex tc">
-  <div class="flex-auto ph4">
-    {{bar-chart data=authorData
-      selectedLabel=selectedAuthor
-      on-click=(action 'toggleBar' 'selectedAuthor')}}
+{{#if model}}
+  <div class="flex tc">
+    <div class="flex-auto ph4">
+      {{bar-chart data=authorData
+        selectedLabel=selectedAuthor
+        on-click=(action 'toggleBar' 'selectedAuthor')}}
 
-    <h2 class='f5 mt3 mb4'>
-      Authors
-    </h2>
+      <h2 class='f5 mt3 mb4'>
+        Authors
+      </h2>
+    </div>
+    <div class="flex-auto ph4">
+      {{bar-chart data=categoryData color='green'
+        selectedLabel=selectedCategory
+        on-click=(action 'toggleBar' 'selectedCategory')}}
+
+      <h2 class='f5 mt3 mb4'>
+        Categories
+      </h2>
+    </div>
+    <div class="flex-auto ph4">
+      {{bar-chart data=commentsData color='red'
+        selectedLabel=selectedPost
+        on-click=(action 'toggleBar' 'selectedPost')}}
+
+      <h2 class='f5 mt3 mb4'>
+        Comments
+      </h2>
+    </div>
   </div>
-  <div class="flex-auto ph4">
-    {{bar-chart data=categoryData color='green'
-      selectedLabel=selectedCategory
-      on-click=(action 'toggleBar' 'selectedCategory')}}
+{{/if}}
 
-    <h2 class='f5 mt3 mb4'>
-      Categories
-    </h2>
-  </div>
-  <div class="flex-auto ph4">
-    {{bar-chart data=commentsData color='red'
-      selectedLabel=selectedPost
-      on-click=(action 'toggleBar' 'selectedPost')}}
-
-    <h2 class='f5 mt3 mb4'>
-      Comments
-    </h2>
-  </div>
-</div>
-
-<table class='lh-title'>
-  <thead>
-    <tr>
-      <th>
-        <a href="" {{action 'sort' 'title'}}>Title</a>
-      </th>
-      <th>
-        <a href="" {{action 'sort' 'author'}}>Author</a>
-      </th>
-      <th>
-        <a href="" {{action 'sort' 'category'}}>Category</a>
-      </th>
-      <th>
-        <a href="" {{action 'sort' 'commentCount'}}>Comments</a>
-      </th>
-      <th>
-        <a href="" {{action 'sort' 'date'}}>Date</a>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each posts as |post|}}
+{{#if model}}
+  <table class='lh-title'>
+    <thead>
       <tr>
-        <td>
-          {{#link-to 'posts.post' post class='link dark-gray dim'}}
-            {{post.title}}
-          {{/link-to}}
-        </td>
-        <td>{{post.author}}</td>
-        <td>{{post.category}}</td>
-        <td>{{post.comments.length}}</td>
-        <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
+        <th>
+          <a href="" {{action 'sort' 'title'}}>Title</a>
+        </th>
+        <th>
+          <a href="" {{action 'sort' 'date'}}>Published</a>
+        </th>
+        <th>
+          <a href="" {{action 'sort' 'author'}}>Author</a>
+        </th>
+        <th>
+          Tags
+        </th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each posts as |post|}}
+        <tr>
+          <td>
+            {{#link-to 'posts.post' post.id class='link dark-gray dim'}}
+              {{post.title}}
+            {{/link-to}}
+          </td>
+          <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
+          <td>{{post.author}}</td>
+          <td>{{tag-list tags=post.tags}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No blog posts yet - get writing!</p>
+{{/if}}

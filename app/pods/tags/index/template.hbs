@@ -1,0 +1,11 @@
+<h1>Tags</h1>
+
+<ul class='bullets'>
+  {{#each model as |tag|}}
+    <li class='mb2'>
+      {{#link-to 'tags.tag' tag.slug class='link near-black dim'}}
+        {{tag.name}} ({{tag.posts.length}} {{inflect-word 'posts' tag.posts.length}})
+      {{/link-to}}
+    </li>
+  {{/each}}
+</ul>

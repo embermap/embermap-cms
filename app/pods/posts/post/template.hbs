@@ -1,11 +1,51 @@
-{{#link-to 'posts' class='link dark-gray dim'}}
-  &lt; Back to all posts
-{{/link-to}}
+<div class="f7">
+  {{#link-to 'posts' class='link silver ttu dim'}}
+    Blog posts
+  {{/link-to}}
+  <span class='moon-gray'>
+    &nbsp;/&nbsp;
+  </span>
+</div>
 
 <h1>{{model.title}}</h1>
 
+<div class="flex mb3 items-center">
+  <p class='mr1'>
+    Tags:
+  </p>
+
+  <span class='mr2'>
+    <a {{action (toggle 'isEditingTags' this)}}
+      class='link silver br1 f7 dib flex items-center justify-center w2 h2 hover-near-black'
+      href="#"
+      data-modal-attach-id='tag-list'>
+      {{fa-icon 'pencil'}}
+    </a>
+  </span>
+
+  {{tag-list tags=model.tags}}
+</div>
+
+<hr class='bt-0 mv3'>
+
 <div class='lh-copy'>
   {{{model.text}}}
+</div>
+
+<h2>
+  Activity
+</h2>
+
+<div class="lh-copy">
+  <ul>
+    {{#each (sort-by 'createdAt:desc' model.activities) as |activity|}}
+      <li>
+        &middot;
+        {{activity.text}}
+        <span class='pl2 silver'>{{moment-from-now activity.createdAt}}</span>
+      </li>
+    {{/each}}
+  </ul>
 </div>
 
 <h2>
@@ -26,3 +66,9 @@
     <p>This post has no comments.</p>
   {{/if}}
 </div>
+
+{{#if isEditingTags}}
+  {{posts/post/components/tags-selector
+    post=model
+    onClose=(action (toggle 'isEditingTags' this))}}
+{{/if}}

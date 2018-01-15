@@ -1,17 +1,54 @@
+import moment from 'moment';
+
 export default function(server) {
+  window.server = server;
 
-  server.createList('post', 3, {
-    author: 'John Smith',
-    category: 'Literature'
+  let javascript = server.create('tag', {
+    name: 'JavaScript',
+    slug: 'javascript'
+  });
+  let css = server.create('tag', {
+    name: 'CSS',
+    slug: 'css'
+  });
+  let opinion = server.create('tag', {
+    name: 'Opinion',
+    slug: 'opinion'
   });
 
-  server.createList('post', 3, 'long', {
-    author: 'Jane Doe'
+  server.create('post', 'withComments', {
+    title: 'Top 10 JavaScript libraries to learn',
+    tags: [ javascript, opinion ],
+    author: 'Chelsea Orn',
+    date: moment().subtract(1, 'day').toISOString(),
+    activities: [
+      server.create('activity', {
+        text: 'The JavaScript tag was added',
+        createdAt: moment().subtract(7, 'days').toISOString()
+      }),
+      server.create('activity', {
+        text: 'The Opinion tag was added',
+        createdAt: moment().subtract(3, 'day').toISOString()
+      }),
+    ]
+  });
+  server.create('post', {
+    title: "Why Silicon Valley needs South Dakota",
+    author: 'Anika Keeling',
+    date: moment().subtract(2, 'days').toISOString(),
+    tags: [ opinion ]
+  });
+  server.create('post', {
+    title: "Mastering the Grid",
+    author: 'Heloise Kemmer',
+    date: moment().subtract(3, 'days').toISOString(),
+    tags: [ css ]
   });
 
-  server.create('post', 'withComments');
-  server.create('post', 'long', 'withComments');
+  server.createList('post', 4, { author: 'Anika Keeling' });
+  server.createList('post', 7, { author: 'Chelsea Orn' });
 
+  // Media data creation
   let city = server.create('album', {
     title: 'City living',
     slug: 'city-living'

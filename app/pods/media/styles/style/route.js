@@ -3,11 +3,11 @@ import Route from '@ember/routing/route';
 export default Route.extend({
 
   model(params) {
-    return this.store.query('image', {
+    return this.get('storefront').loadAll('image', {
       filter: {
         style: params.style
       }
     });
-  },
+  }
 
 });

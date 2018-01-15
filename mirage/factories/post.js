@@ -7,7 +7,7 @@ export default Factory.extend({
   },
 
   text() {
-    return faker.lorem.paragraphs(5).split('\n').join('\n<br /><br />');
+    return faker.lorem.paragraphs(3).split('\n').join('\n<br /><br />');
   },
 
   author() {
@@ -21,7 +21,11 @@ export default Factory.extend({
   },
 
   date() {
-    return faker.date.past();
+    return faker.date.past().toISOString();
+  },
+
+  commentsCount() {
+    return faker.random.number({ min: 0, max: 13 });
   },
 
   long: trait({
