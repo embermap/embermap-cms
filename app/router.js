@@ -9,7 +9,9 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('dashboard', { path: '/' });
   this.route('posts', function() {
-    this.route('post', { path: '/:post_id' });
+    this.route('post', { path: '/:post_id' }, function() {
+      this.route('edit');
+    });
   });
   this.route('tags', function() {
     this.route('tag', { path: '/:tag_slug' });

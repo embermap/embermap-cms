@@ -1,5 +1,9 @@
 <h1>Blog posts</h1>
 
+{{#if error}}
+  <h2>{{error}}!</h2>
+{{/if}}
+
 {{#if model}}
   <div class="flex tc">
     <div class="flex-auto ph4">

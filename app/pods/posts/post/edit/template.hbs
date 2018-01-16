@@ -1,0 +1,15 @@
+<p>Edit your post</p>
+
+<div class="mt3">
+  {{textarea value=model.text rows=20}}
+</div>
+
+<div class="mt3">
+  <button onclick={{perform save}}>
+    Save
+  </button>
+</div>
+
+{{#if save.last.isError}}
+  <p>Woops - something happened! Try again.</p>
+{{/if}}

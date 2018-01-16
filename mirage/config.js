@@ -10,6 +10,7 @@ export default function() {
 
   this.resource('tags');
   this.resource('posts');
+  // this.get('/posts', { errors: [ 'Something happened' ] }, 500);
 
   this.patch('/posts/:id', function(schema, request) {
     let post = schema.posts.find(request.params.id);
@@ -38,6 +39,7 @@ export default function() {
 
     return post;
   });
+  // this.patch('/posts/:id', {}, 500);
 
   this.get('albums', filterable('albums', [ 'slug' ]));
   this.get('images', filterable('images', [ 'slug', 'style' ]));
