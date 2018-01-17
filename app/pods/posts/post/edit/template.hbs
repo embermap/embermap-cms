@@ -19,5 +19,12 @@
         Save
       {{/if}}
     </button>
+
+    {{#if save.last.isError}}
+      <p class='mt3 red'>
+        {{fa-icon 'exclamation-circle'}}
+        Whoops - your post was not saved. Please try again!
+      </p>
+    {{/if}}
   </div>
 </div>
