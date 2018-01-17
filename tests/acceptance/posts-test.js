@@ -6,11 +6,9 @@ moduleForAcceptance('Acceptance | Posts test');
 test('I can see the posts', async function(assert) {
   server.createList('post', 3);
 
-  visit('/posts');
+  await visit('/posts');
 
-  andThen(function() {
-    assert.equal(find('tbody tr').length, 3);
-  });
+  assert.equal(find('tbody tr').length, 3);
 });
 
 test('If the index route errors, I see a message', async function(assert) {
