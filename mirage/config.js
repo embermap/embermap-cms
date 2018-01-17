@@ -6,11 +6,11 @@ import moment from 'moment';
 faker.seed(123);
 
 export default function() {
-  this.timing = 20;
+  this.timing = 200;
 
   this.resource('tags');
   this.resource('posts');
-  // this.get('/posts', { errors: [ 'Something happened' ] }, 500);
+  // this.get('/posts', { errors: [ 'Our database went on vacation' ] }, 500);
 
   this.patch('/posts/:id', function(schema, request) {
     let post = schema.posts.find(request.params.id);
@@ -18,28 +18,34 @@ export default function() {
     let activityText;
     let currentTags = post.tags;
     let newTags = schema.tags.find(attrs.tagIds);
+    let didAddTag = newTags.length > currentTags.length;
+    let didRemoveTag = newTags.length < currentTags.length;
+    let tagsDidChange = didAddTag || didRemoveTag;
 
-    if (newTags.length > currentTags.length) {
+    if (didAddTag) {
       let addedTag = newTags.filter(tag => !currentTags.includes(tag)).models[0];
       activityText = `The ${addedTag.name} tag was added`;
 
-    } else if (currentTags.length > newTags.length) {
+    } else if (didRemoveTag) {
       let removedTag = currentTags.filter(tag => !newTags.includes(tag)).models[0];
       activityText = `The ${removedTag.name} tag was removed`;
     }
 
-    let activity = schema.activities.create({
-      text: activityText,
-      createdAt: moment().toISOString()
-    });
-
     post.update(attrs);
-    post.activities.add(activity);
-    post.save();
+
+    if (tagsDidChange) {
+      let activity = schema.activities.create({
+        text: activityText,
+        createdAt: moment().toISOString()
+      });
+
+      post.activities.add(activity);
+      post.save();
+    }
 
     return post;
   });
-  // this.patch('/posts/:id', {}, 500);
+  // this.patch('/posts/:id', { errors: [ 'Something happened' ] }, 500);
 
   this.get('albums', filterable('albums', [ 'slug' ]));
   this.get('images', filterable('images', [ 'slug', 'style' ]));

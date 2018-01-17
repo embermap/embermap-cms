@@ -1,15 +1,32 @@
-<p>Edit your post</p>
+<div class="flex mt3">
+  <div class="w-75">
+    <h1 class='mt0 w-100'>
+      {{input value=model.title class='w-100 pa2'}}
+    </h1>
 
-<div class="mt3">
-  {{textarea value=model.text rows=20}}
+    <div class="mt3">
+      {{textarea value=model.text rows=20
+        class='pa2 b--light-gray w-100'}}
+    </div>
+  </div>
+
+  <div class="w-25 pl4">
+    <button onclick={{perform save}}
+      class='ph3 pv2 dib white bg-green dim bn pointer'>
+      {{#if save.isRunning}}
+        Saving...
+      {{else}}
+        Save
+      {{/if}}
+    </button>
+
+    {{#if save.last.isError}}
+      <div class="mt3">
+        <p class='red'>
+          {{fa-icon 'exclamation-circle'}}
+          Whoops - your post was not saved. Please try again.
+        </p>
+      </div>
+    {{/if}}
+  </div>
 </div>
-
-<div class="mt3">
-  <button onclick={{perform save}}>
-    Save
-  </button>
-</div>
-
-{{#if save.last.isError}}
-  <p>Woops - something happened! Try again.</p>
-{{/if}}

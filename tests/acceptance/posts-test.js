@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'embermap-cms/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | posts test');
+moduleForAcceptance('Acceptance | Posts test');
 
 test('I can see the posts', async function(assert) {
   server.createList('post', 3);
@@ -35,7 +35,7 @@ test('I can edit a post', async function(assert) {
   assert.ok(find(':contains(New post body)').length > 0);
 });
 
-test('if saving a post errors, I see a message', async function(assert) {
+test('if editing a post errors, I see a message', async function(assert) {
   server.create('post', { text: 'Old post body' });
   server.patch('/posts/:id', { errors: [ 'A bad thing happened' ] }, 500);
 
@@ -46,5 +46,5 @@ test('if saving a post errors, I see a message', async function(assert) {
     return click('button:contains(Save)');
   }, 'PATCH /posts/1 returned a 500');
 
-  assert.ok(find(':contains(Woops - something happened!)').length > 0, 'I see the message');
+  assert.ok(find(':contains(Whoops - your post was not saved)').length > 0, 'I see the message');
 });

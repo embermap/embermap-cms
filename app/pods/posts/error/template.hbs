@@ -1,9 +1,9 @@
-<h1>Woops!</h1>
+<h1>Uh-oh...</h1>
 
-<p>There was an error fetching the posts.</p>
+<p>We couldn't load the posts, because:</p>
 
-<p>The errors were:</p>
-
-{{#each model.errors as |error|}}
-  <p>{{error}}</p>
-{{/each}}
+<ul class='mt3 bullets'>
+  {{#each model.errors as |error|}}
+    <li>{{error}}</li>
+  {{/each}}
+</ul>

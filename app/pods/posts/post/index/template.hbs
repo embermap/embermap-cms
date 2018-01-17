@@ -1,3 +1,13 @@
+<div class="flex items-center">
+  <h1>{{model.title}}</h1>
+
+  <p class='pl4'>
+    {{#link-to 'posts.post.edit' model.id class='dim link silver'}}
+      Edit post
+    {{/link-to}}
+  </p>
+</div>
+
 <div class="flex mb3 items-center">
   <p class='mr1'>
     Tags:
@@ -20,12 +30,6 @@
 <div class='lh-copy'>
   {{{model.text}}}
 </div>
-
-<p class='mt5'>
-  {{#link-to 'posts.post.edit' model.id}}
-    Edit post
-  {{/link-to}}
-</p>
 
 <h2>
   Activity
