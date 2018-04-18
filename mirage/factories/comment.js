@@ -1,4 +1,4 @@
-import { Factory, faker } from 'ember-cli-mirage';
+import { Factory, faker, trait } from 'ember-cli-mirage';
 
 export default Factory.extend({
 
@@ -8,6 +8,12 @@ export default Factory.extend({
 
   author() {
     return faker.name.findName();
-  }
+  },
+
+  long: trait({
+    text() {
+      return faker.lorem.sentences(40);
+    } 
+  })
 
 });

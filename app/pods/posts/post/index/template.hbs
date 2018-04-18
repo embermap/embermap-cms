@@ -58,7 +58,7 @@
   {{#if model.comments}}
     <ul>
       {{#each model.comments as |comment|}}
-        <li>&middot; {{comment.text}} <em class='i'>– {{comment.author}}</em></li>
+        {{comment-box comment=comment}}
       {{/each}}
     </ul>
   {{else}}
