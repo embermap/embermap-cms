@@ -16,7 +16,9 @@ const COLORS = {
 export default Component.extend({
 
   color: 'blue',
-  data: [],
+  data: computed(function() {
+    return [];
+  }),
   'on-click': null,
 
   highlightedLabel: or('selectedLabel', 'hoveredLabel'),
