@@ -22,7 +22,7 @@
     </button>
 
     {{#if save.last.isError}}
-      <p class='mt3 red'>
+      <p class='mt3 red' data-test-id="error">
         {{fa-icon 'exclamation-circle'}}
         Whoops - your post was not saved. Please try again!
       </p>

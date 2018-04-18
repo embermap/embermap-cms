@@ -21,16 +21,16 @@ module('Acceptance | posts', function(hooks) {
     assert.equal(findAll('tbody tr').length, 3);
   });
 
-  // test("If there's a problem loading the posts, I see an error message", async function(assert) {
-  //   server.createList('post', 3);
-  //   server.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
-  //
-  //   await assert.asyncThrows(async () => {
-  //     return await visit('/posts');
-  //   }, 'GET /posts returned a 500');
-  //
-  //   assert.ok(findAll(':contains(The database is on vacation)').length > 0)
-  // });
+  test("If there's a problem loading the posts, I see an error message", async function(assert) {
+    server.createList('post', 3);
+    server.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
+
+    await assert.asyncThrows(async () => {
+      return await visit('/posts');
+    }, 'GET /posts returned a 500');
+
+    assert.dom(testId('error')).hasText('The database is on vacation');
+  });
 
   test('I can edit a blog post', async function(assert) {
     let post = server.create('post', { title: 'Old post title' });
@@ -56,6 +56,6 @@ module('Acceptance | posts', function(hooks) {
   //     return await click(testId('save'));
   //   }, 'PATCH /posts/1 returned a 500');
   //
-  //   assert.ok(findAll(':contains(Whoops - your post was not saved)').length > 0)
+  //   assert.dom(testId('error')).hasText('Whoops - your post was not saved');
   // });
 });
