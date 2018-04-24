@@ -1,13 +1,15 @@
 <li>
   &middot;
 
-  {{#if (or (not isLong) isExpanded)}}
-    {{comment.text}}
+  <span data-test-id="text">
+    {{#if (or (not isLong) isExpanded)}}
+      {{comment.text}}
 
-  {{else}}
-    {{truncate comment.text 24}}...
+    {{else}}
+      {{truncate comment.text 24}}...
 
-  {{/if}}
+    {{/if}}
+  </span>
 
   {{#if isLong}}
     <a href="#"
@@ -16,6 +18,6 @@
         Show {{if isExpanded "less" "more"}}</a>
   {{/if}}
 
-  <em class='i'>– {{comment.author}}</em>
+  <em class='i' data-test-id="author">– {{comment.author}}</em>
 
 </li>

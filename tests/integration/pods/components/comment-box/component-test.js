@@ -6,21 +6,16 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | comment-box', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it can render a comment', async function(assert) {
+    this.comment = {
+      text: 'hello world',
+      author: 'Ryan'
+    };
 
-    await render(hbs`{{comment-box}}`);
+    await render(hbs`{{comment-box comment=comment}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom('[data-test-id="text"]').hasText('hello world');
+    assert.dom('[data-test-id="author"]').includesText('Ryan');
 
-    // Template block usage:
-    await render(hbs`
-      {{#comment-box}}
-        template block text
-      {{/comment-box}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });
