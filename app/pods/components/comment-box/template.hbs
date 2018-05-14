@@ -14,7 +14,8 @@
   {{#if isLong}}
     <a href="#"
       {{action (toggle "isExpanded" this)}}
-      class="gray">
+      class="gray"
+      data-test-id="toggle-full-comment">
         Show {{if isExpanded "less" "more"}}</a>
   {{/if}}
 
