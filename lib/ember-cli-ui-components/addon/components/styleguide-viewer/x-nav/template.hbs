@@ -1,0 +1,11 @@
+<header class='sg-viewer-nav__header'>
+  {{#link-to 'styleguide' class='sg-viewer-nav__header-link'}}
+    Styleguide
+  {{/link-to}}
+</header>
+
+<ul class='sg-viewer-nav__items'>
+  {{yield (hash
+    item=(component 'styleguide-viewer/x-nav/x-item')
+  )}}
+</ul>

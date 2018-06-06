@@ -1,0 +1,55 @@
+{{#sg-title}}
+  Button with action
+{{/sg-title}}
+
+{{sg-snippet name="sg-button-action.hbs" language="htmlbars"}}
+
+{{#sg-text}}
+  The count is: {{count}}
+{{/sg-text}}
+
+{{!-- BEGIN-SNIPPET sg-button-action --}}
+{{#ui-button
+  onClick=(action "incrementCounter")}}
+  Increment counter
+{{/ui-button}}
+{{!-- END-SNIPPET --}}
+
+
+
+{{#sg-title}}
+  Disabled button
+{{/sg-title}}
+
+{{sg-snippet name="sg-button-disabled.hbs" language="htmlbars"}}
+
+{{#sg-text}}
+  The count is: {{count}}
+{{/sg-text}}
+
+{{!-- BEGIN-SNIPPET sg-button-disabled --}}
+{{#ui-button
+  disabled=true
+  onClick=(action "incrementCounter")}}
+  Increment counter
+{{/ui-button}}
+{{!-- END-SNIPPET --}}
+
+
+{{#sg-title}}
+  Button with task
+{{/sg-title}}
+
+{{sg-snippet name="sg-button-task.hbs" language="htmlbars"}}
+
+{{#sg-text}}
+  The task is {{if longRunningTask.isRunning 'running' 'not running'}}
+  and the count is {{count}}.
+{{/sg-text}}
+
+{{!-- BEGIN-SNIPPET sg-button-task --}}
+{{#ui-button
+  task=longRunningTask}}
+  Increment counter
+{{/ui-button}}
+{{!-- END-SNIPPET --}}

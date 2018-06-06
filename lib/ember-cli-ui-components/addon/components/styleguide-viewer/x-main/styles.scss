@@ -1,0 +1,14 @@
+.sg-viewer-main {
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+  flex: 1;
+
+  &__content {
+    flex-basis: 1000px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

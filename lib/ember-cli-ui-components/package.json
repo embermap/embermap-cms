@@ -1,0 +1,13 @@
+{
+  "name": "ember-cli-ui-components",
+  "dependencies": {
+    "ember-cli-babel": "*",
+    "ember-cli-htmlbars": "*",
+    "ember-cli-sass": "*",
+    "ember-code-snippet": "*",
+    "ember-component-css": "*"
+  },
+  "keywords": [
+    "ember-addon"
+  ]
+}
