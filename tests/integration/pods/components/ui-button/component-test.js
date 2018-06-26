@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { render, click, waitFor } from '@ember/test-helpers';
+import { task, timeout } from 'ember-concurrency';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | ui-button', function(hooks) {
@@ -30,4 +31,31 @@ module('Integration | Component | ui-button', function(hooks) {
     assert.verifySteps([]);
   });
 
+  test('a button can perform a task', async function(assert) {
+    let myTask = task(function*() {
+      assert.step('button clicked');
+      yield timeout(10);
+    });
+    this.set('myTask', myTask);
+
+    await render(hbs`{{#ui-button task=myTask}}my button{{/ui-button}}`);
+    await click('button');
+
+    assert.verifySteps(['button clicked']);
+  });
+
+  test('a button shows a loading spinner while the task is running', async function(assert) {
+    let myTask = task(function*() {
+      yield timeout(5000);
+    });
+    this.set('myTask', myTask);
+
+    await render(hbs`{{#ui-button task=myTask}}my button{{/ui-button}}`);
+    click('button');
+
+    await waitFor('[data-test-id="loading"]');
+    assert.dom('[data-test-id="loading"]').exists();
+
+    this.get('myTask').cancelAll();
+  });
 });
