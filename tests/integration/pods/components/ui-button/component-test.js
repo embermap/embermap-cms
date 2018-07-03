@@ -1,4 +1,5 @@
 import { module, test } from 'qunit';
+import TaskHelper from 'embermap-cms/tests/helpers/task-helper';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, waitFor } from '@ember/test-helpers';
 import { task, timeout } from 'ember-concurrency';
@@ -45,10 +46,8 @@ module('Integration | Component | ui-button', function(hooks) {
   });
 
   test('a button shows a loading spinner while the task is running', async function(assert) {
-    let myTask = task(function*() {
-      yield timeout(5000);
-    });
-    this.set('myTask', myTask);
+    let helper = new TaskHelper();
+    this.set('myTask', helper.task);
 
     await render(hbs`{{#ui-button task=myTask}}my button{{/ui-button}}`);
     click('button');
@@ -56,6 +55,9 @@ module('Integration | Component | ui-button', function(hooks) {
     await waitFor('[data-test-id="loading"]');
     assert.dom('[data-test-id="loading"]').exists();
 
-    this.get('myTask').cancelAll();
+    helper.finishTask();
+
+    await waitFor('[data-test-id="loading"]', { count: 0 });
+    assert.dom('[data-test-id="loading"]').doesNotExist();
   });
 });
