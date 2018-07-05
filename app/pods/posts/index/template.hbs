@@ -52,11 +52,14 @@
         <th>
           Tags
         </th>
+        <th>
+          &nbsp;
+        </th>
       </tr>
     </thead>
     <tbody>
       {{#each posts as |post|}}
-        <tr>
+        <tr class="hide-child">
           <td>
             {{#link-to 'posts.post' post.id class='link dark-gray dim'}}
               {{post.title}}
@@ -65,10 +68,24 @@
           <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
           <td>{{post.author}}</td>
           <td>{{tag-list tags=post.tags}}</td>
+          <td class="tr">
+            <a href="#" {{action "showDelete" post}}
+              class="child no-transition gray no-underline">
+              {{fa-icon "trash"}}
+              <span class="f6">Delete</span>
+            </a>
+          </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
 {{else}}
   <p>No blog posts yet - get writing!</p>
+{{/if}}
+
+{{#if postToDelete}}
+  {{confirm-delete-post
+    on-delete=(action (mut postToDelete) null)
+    on-cancel=(action (mut postToDelete) null)
+    post=postToDelete}}
 {{/if}}

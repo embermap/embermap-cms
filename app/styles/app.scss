@@ -2,6 +2,7 @@
 @import './reset';
 @import './tachyons';
 
+
 body {
   // overflow: hidden;
   @extend .lh-copy;
@@ -134,4 +135,47 @@ tbody tr:hover {
 
 .no-events {
   pointer-events: none;
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+.vw-100 {
+  width: 100vw;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 25%;
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 25%;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 25%;
+    transform: translateY(80px);
+  }
+
+}
+
+.fade-up-and-down {
+  animation: fadeUp, fadeDown;
+  animation-duration: 0.5s, 1s;
+  animation-delay: 0s, 3s;
+  animation-iteration-count: 1, 1;
 }

@@ -63,6 +63,14 @@ export default Controller.extend({
       let newValue = this.get(property) === label ? null : label;
 
       this.set(property, newValue);
+    },
+
+    showDelete(post) {
+      this.set('postToDelete', post);
+    },
+
+    didDelete(post) {
+      this.set('postToDelete', null);
     }
   }
 

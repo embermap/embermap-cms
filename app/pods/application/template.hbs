@@ -1,3 +1,14 @@
+{{#if flashMessages.queue}}
+  <div class="no-events fixed flex flex-column justify-end items-start z-999 vh-100 vw-100">
+    {{#each flashMessages.queue as |flash|}}
+      <div class="
+        ml3 mb3 white bg-dark-gray pv3 ph4 shadow-4 br2 fade-up-and-down">
+        {{flash.message}}
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+
 <div class='app'>
   <header class='app-header'>
     Acme, Inc.
