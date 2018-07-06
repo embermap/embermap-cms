@@ -1,0 +1,20 @@
+{{#styleguide-viewer as |viewer|}}
+  {{#viewer.nav as |nav|}}
+    {{nav.item 'UI BUTTON' 'styleguide.components.component' 'ui-button'}}
+    {{nav.item 'UI P' 'styleguide.components.component' 'ui-p'}}
+    {{nav.item 'UI ALERT' 'styleguide.components.component' 'ui-alert'}}
+    {{nav.item 'UI CONTAINER' 'styleguide.components.component' 'ui-container'}}
+    {{nav.item 'UI FLASH MESSAGE' 'styleguide.components.component' 'ui-flash-message'}}
+    {{nav.item 'UI INPUT' 'styleguide.components.component' 'ui-input'}}
+    {{nav.item 'UI LABEL' 'styleguide.components.component' 'ui-label'}}
+    {{nav.item 'UI LINK' 'styleguide.components.component' 'ui-link'}}
+    {{nav.item 'UI LOADING' 'styleguide.components.component' 'ui-loading'}}
+    {{nav.item 'UI PANEL' 'styleguide.components.component' 'ui-panel'}}
+    {{nav.item 'UI TITLE' 'styleguide.components.component' 'ui-title'}}
+  {{/viewer.nav}}
+
+  {{#viewer.main}}
+    {{outlet}}
+  {{/viewer.main}}
+
+{{/styleguide-viewer}}

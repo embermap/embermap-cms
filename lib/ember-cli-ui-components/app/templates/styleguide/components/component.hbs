@@ -1,0 +1,9 @@
+  {{!-- {{#sg-title}}
+    {{componentLabel}}
+  {{/sg-title}}
+
+  {{sg-demos for=componentName}} --}}
+
+{{#if hasCustomStyleguideComponent}}
+  {{component (concat "styleguide/components/" componentName)}}
+{{/if}}

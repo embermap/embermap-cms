@@ -11,15 +11,9 @@
   </div>
 
   <div class="w-25 pl4">
-    <button onclick={{perform save}}
-      class='ph3 pv2 dib white bg-green dim bn pointer'
-      data-test-id="save">
-      {{#if save.isRunning}}
-        Saving...
-      {{else}}
-        Save
-      {{/if}}
-    </button>
+    {{#ui-button task=save data-test-id="save"}}
+      Save
+    {{/ui-button}}
 
     {{#if save.last.isError}}
       <p class='mt3 red' data-test-id="error">

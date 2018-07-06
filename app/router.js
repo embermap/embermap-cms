@@ -29,6 +29,13 @@ Router.map(function() {
     });
   });
   this.route('comments');
+
+
+  this.route('styleguide', function() {
+    this.route('components', function() {
+      this.route('component', { path: '/:component_name' });
+    });
+  });
 });
 
 export default Router;

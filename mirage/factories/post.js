@@ -38,9 +38,9 @@ export default Factory.extend({
 
   withComments: trait({
     afterCreate(post, server) {
-      server.createList('comment', 3, {
-        post
-      });
+      server.create('comment', { post });
+      server.create('comment', 'long', { post });
+      server.create('comment', { post });
     }
   })
 

@@ -1,0 +1,41 @@
+.sg-demo {
+  margin-bottom: 40px;
+  // border: 1px solid #E4E4E4;
+  border: 3px solid #f7f7f9;
+  // border-radius: 6px;
+  overflow: hidden;
+  // padding: 17px;
+
+  &__snippets {
+    padding: -17px;
+  }
+
+  &__snippets-nav {
+    // background: #E3E3E3;
+    border-top: 3px solid #f7f7f9;
+    padding: 12px 16px;
+    font-weight: bold;
+  }
+
+  &__snippets-nav-item {
+    color: #AAA;
+    padding-right: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: 'helvetica neue',helvetica,sans-serif;
+
+    &:focus {
+      color: #AAA;
+    }
+
+    &:hover,
+    &--active,
+    &--active:focus {
+      color: #444;
+    }
+  }
+
+  &__snippet-wrapper {
+    background-color: #f8f8f8;
+  }
+}

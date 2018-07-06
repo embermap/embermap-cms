@@ -1,0 +1,28 @@
+{{yield (hash
+  example=(component 'sg-demo/x-example')
+  snippet=(component 'sg-demo/x-snippet' did-init=(action 'registerSnippet') activeSnippet=activeSnippet)
+  live-example=(component 'sg-demo/x-live-example')
+)}}
+
+{{#if (gt snippets.length 1)}}
+  <nav class="sg-demo__snippets-nav">
+    {{#each snippets as |snippet|}}
+      <a href='#' {{action 'selectSnippet' snippet}}
+        class='
+          sg-demo__snippets-nav-item
+          {{if snippet.isActive 'sg-demo__snippets-nav-item--active'}}
+        '
+      >
+        {{snippet.label}}
+      </a>
+    {{/each}}
+  </nav>
+{{/if}}
+
+{{#each snippets as |snippet|}}
+  {{#if snippet.isActive}}
+    <div class="sg-demo__snippet-wrapper">
+      {{sg-snippet name=snippet.name unindent=true language=snippet.language}}
+    </div>
+  {{/if}}
+{{/each}}

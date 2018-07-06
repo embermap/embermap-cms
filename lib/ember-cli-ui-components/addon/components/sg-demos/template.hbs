@@ -1,0 +1,67 @@
+{{#each componentStyles as |componentStyle|}}
+  {{#sg-subtitle}}
+    {{componentStyle.name}}
+  {{/sg-subtitle}}
+
+  {{#if componentStyle.text}}
+    {{#sg-text}}
+      {{componentStyle.text}}
+    {{/sg-text}}
+  {{/if}}
+
+  {{#sg-demo as |demo|}}
+    {{#demo.example name='ui-button-colors'}}
+      {{#each componentStyle.styles as |style|}}
+        <span class="pr2">
+          {{#component componentName style=style}}
+            {{style}}
+          {{/component}}
+        </span>
+      {{else}}
+        {{#component componentName}}
+          Default style
+        {{/component}}
+      {{/each}}
+    {{/demo.example}}
+{{!--
+    {{demo.snippet 'ui-button-colors.hbs'}} --}}
+  {{/sg-demo}}
+{{/each}}
+
+{{!-- {{#sg-subtitle}}
+  Colors
+{{/sg-subtitle}}
+
+{{#sg-demo as |demo|}}
+  {{#demo.example name='i-button-colors'}}
+    {{#ui-button style='gray'}}
+      gray
+    {{/ui-button}}
+
+    {{#ui-button style='brand'}}
+      brand
+    {{/ui-button}}
+
+    {{#ui-button style='warn'}}
+      warn
+    {{/ui-button}}
+
+    {{#ui-button style='white'}}
+      white
+    {{/ui-button}}
+
+    {{#ui-button style='blue'}}
+      blue
+    {{/ui-button}}
+
+    {{#ui-button style='white-bg'}}
+      white-bg
+    {{/ui-button}}
+
+    {{#ui-button style='subtle'}}
+      subtle
+    {{/ui-button}}
+  {{/demo.example}}
+
+  {{demo.snippet 'ui-button-colors.hbs'}}
+{{/sg-demo}} --}}

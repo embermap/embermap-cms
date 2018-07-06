@@ -1,0 +1,24 @@
+<li>
+  &middot;
+
+  <span data-test-id="text">
+    {{#if (or (not isLong) isExpanded)}}
+      {{comment.text}}
+
+    {{else}}
+      {{truncate comment.text 24}}...
+
+    {{/if}}
+  </span>
+
+  {{#if isLong}}
+    <a href="#"
+      {{action (toggle "isExpanded" this)}}
+      class="gray"
+      data-test-id={{if isExpanded "show-less" "show-more"}}>
+        Show {{if isExpanded "less" "more"}}</a>
+  {{/if}}
+
+  <em class='i' data-test-id="author">– {{comment.author}}</em>
+
+</li>

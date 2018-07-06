@@ -1,0 +1,30 @@
+.sg-viewer-nav {
+  background-color: #fafafa;
+  flex: 0 0 300px;
+  // border-right: 1px solid #eee;
+  font-size: 15px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    text-align: center;
+    padding: 50px 20px;
+    // border-bottom: 1px solid #eee;
+  }
+
+  &__header-link {
+    font-family: 'helvetica neue',helvetica,sans-serif;
+    text-decoration: none;
+    color: #333;
+    font-size: 26px;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__items {
+    margin-top: 20px;
+  }
+}
