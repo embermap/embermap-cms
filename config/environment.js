@@ -28,6 +28,9 @@ module.exports = function(environment) {
     },
     'ember-component-css': {
       namespacing: false
+    },
+    flashMessageDefaults: {
+      extendedTimeout: 500
     }
   };
 

@@ -1,0 +1,20 @@
+{{#ui-modal onClose=(action on-cancel)}}
+
+  <div class="mh3 mt3">
+    <h1 class="f3 lh-title mb3 mt0">
+      Delete post?
+    </h1>
+
+    <p class="f5 lh-normal mb5">
+      Are you sure you want to delete {{post.title}}? This
+      action cannot be undone.
+    </p>
+
+    <div class="flex justify-end items-center">
+      {{#ui-button task=deletePost}}
+        Delete post
+      {{/ui-button}}
+    </div>
+  </div>
+
+{{/ui-modal}}
