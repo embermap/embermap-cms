@@ -15,7 +15,5 @@ export default Component.extend({
 
     yield post.destroyRecord();
     this.get('on-delete')();
-
-    this.get('flashMessages').success('Post successfully deleted!');
   })
 });

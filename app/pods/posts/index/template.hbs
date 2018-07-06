@@ -85,7 +85,7 @@
 
 {{#if postToDelete}}
   {{confirm-delete-post
-    on-delete=(action (mut postToDelete) null)
+    on-delete=(action "afterDelete")
     on-cancel=(action (mut postToDelete) null)
     post=postToDelete}}
 {{/if}}
