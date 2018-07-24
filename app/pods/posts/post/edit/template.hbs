@@ -11,9 +11,24 @@
   </div>
 
   <div class="w-25 pl4">
-    {{#ui-button task=save data-test-id="save"}}
-      Save
-    {{/ui-button}}
+
+    {{#network-status as |status|}}
+
+      {{#ui-button
+        task=save
+        disabled=status.isOffline
+        data-test-id="save"}}
+        Save
+      {{/ui-button}}
+
+      {{#if status.isOffline}}
+        <p class='mt3 red' data-test-id="error">
+          Looks like you're offline! You won't be
+          able to save this post.
+        </p>
+      {{/if}}
+
+    {{/network-status}}
 
     {{#if save.last.isError}}
       <p class='mt3 red' data-test-id="error">
