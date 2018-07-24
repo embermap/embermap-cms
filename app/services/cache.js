@@ -1,9 +1,10 @@
 import Service from '@ember/service';
 
-let cache = {};
-
 export default Service.extend({
-  cache,
+  init() {
+    this._super(...arguments);
+    this.set('cache', {});
+  },
 
   add(key, value) {
     let cache = this.get('cache');
