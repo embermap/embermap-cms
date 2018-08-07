@@ -58,8 +58,13 @@
       </tr>
     </thead>
     <tbody>
+
+      {{keyboard-press key="KeyJ" on-press=(action (mut navigatedPost) (if navigatedPost (next navigatedPost posts) posts.firstObject))}}
+      {{keyboard-press key="KeyK" on-press=(action (mut navigatedPost) (if navigatedPost (previous navigatedPost posts) posts.lastObject))}}
+      {{keyboard-press key="Enter" on-press=(action "openPost" navigatedPost)}}
+
       {{#each posts as |post|}}
-        <tr class="hide-child">
+        <tr class="hide-child" class="bl bw2 {{if (eq post navigatedPost) 'b--blue' 'b--transparent'}}">
           <td>
             {{#link-to 'posts.post' post.id class='link dark-gray dim'}}
               {{post.title}}
