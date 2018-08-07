@@ -52,6 +52,12 @@ export default Controller.extend({
   }),
 
   actions: {
+    openPost(post) {
+      if (post) {
+        this.transitionToRoute('posts.post', post);
+      }
+    },
+
     sort(field) {
       if (field === this.get('activeSortBy')) {
         this.set('activeSortBy', `${field}:desc`);
@@ -72,7 +78,7 @@ export default Controller.extend({
 
     afterDelete() {
       this.set('postToDelete', null);
-      
+
       later(() => {
         this.get('flashMessages').success('Post successfully deleted!');
       }, 1000);
