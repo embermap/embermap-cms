@@ -3,7 +3,7 @@ import testId from '../helpers/test-id';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { assertionInjector } from '../assertions';
+import { assertionInjector, assertionCleanup } from '../assertions';
 
 module('Acceptance | posts', function(hooks) {
   setupApplicationTest(hooks);
@@ -11,6 +11,10 @@ module('Acceptance | posts', function(hooks) {
 
   hooks.beforeEach(function() {
     assertionInjector(this.owner);
+  });
+
+  hooks.afterEach(function() {
+    assertionCleanup(this.owner);
   });
 
   test('I can view the index of posts', async function(assert) {
