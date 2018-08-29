@@ -30,6 +30,8 @@ Router.map(function() {
   });
   this.route('comments');
 
+  this.route('forms');
+
 
   this.route('styleguide', function() {
     this.route('components', function() {
