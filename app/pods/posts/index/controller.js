@@ -1,5 +1,4 @@
 import { sort, map } from '@ember/object/computed';
-import { later } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import groupBy from 'ember-group-by';
@@ -70,22 +69,6 @@ export default Controller.extend({
       let newValue = this.get(property) === label ? null : label;
 
       this.set(property, newValue);
-    },
-
-    showDelete(post) {
-      this.set('postToDelete', post);
-    },
-
-    afterDelete() {
-      this.set('postToDelete', null);
-
-      later(() => {
-        this.get('flashMessages').success('Post successfully deleted!');
-      }, 1000);
-    },
-
-    didDelete(post) {
-      this.set('postToDelete', null);
     }
   }
 

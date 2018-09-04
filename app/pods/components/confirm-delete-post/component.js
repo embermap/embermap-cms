@@ -1,19 +1,25 @@
 import Component from '@ember/component';
-import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
   post: null,
 
-  'on-delete'() {},
   'on-cancel'() {},
+  'after-delete'() {},
 
   flashMessages: service(),
 
-  deletePost: task(function*() {
-    let post = this.get('post');
+  actions: {
+    deletePost() {
+      let post = this.get('post');
 
-    yield post.destroyRecord();
-    this.get('on-delete')();
-  })
+      return post.destroyRecord().then(() => {
+        this.get('after-delete')();
+
+        setTimeout(() => {
+          this.get('flashMessages').success('Post successfully deleted!');
+        }, 1000);
+      });
+    }
+  }
 });

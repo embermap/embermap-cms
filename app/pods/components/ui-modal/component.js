@@ -9,7 +9,7 @@ import $ from 'jquery';
 
   Close action:
 
-      {{#ui-modal on-close=(action '') as |m|}}
+      {{#ui-modal onClose=(action '') as |m|}}
 
 */
 export default Component.extend({
@@ -22,7 +22,7 @@ export default Component.extend({
 
     $('body').on('keyup.modal-dialog', (e) => {
       if (e.keyCode === 27) {
-        this.get('on-close')();
+        this.get('onClose')();
       }
     });
   },
