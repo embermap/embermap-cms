@@ -1,3 +1,4 @@
+@import "ember-modal-dialog/ember-modal-structure";
 @import 'pod-styles';
 @import './reset';
 @import './tachyons';
@@ -178,4 +179,8 @@ tbody tr:hover {
   animation-duration: 0.5s, 1s;
   animation-delay: 0s, 3s;
   animation-iteration-count: 1, 1;
+}
+
+.pointer[disabled]:hover {
+  cursor: auto;
 }

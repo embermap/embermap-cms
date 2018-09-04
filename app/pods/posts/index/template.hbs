@@ -37,6 +37,7 @@
 {{/if}}
 
 {{#if model}}
+
   <table class='lh-title'>
     <thead>
       <tr>
@@ -64,7 +65,8 @@
       {{keyboard-press key="Enter" on-press=(action "openPost" navigatedPost)}}
 
       {{#each posts as |post|}}
-        <tr class="hide-child" class="bl bw2 {{if (eq post navigatedPost) 'b--blue' 'b--transparent'}}">
+        <tr class="hide-child bl bw2 {{if (eq post navigatedPost) 'b--blue' 'b--transparent'}}"
+          data-test-id="post-row">
           <td>
             {{#link-to 'posts.post' post.id class='link dark-gray dim'}}
               {{post.title}}
@@ -74,8 +76,9 @@
           <td>{{post.author}}</td>
           <td>{{tag-list tags=post.tags}}</td>
           <td class="tr">
-            <a href="#" {{action "showDelete" post}}
-              class="child no-transition gray no-underline">
+            <a href="#" {{action (mut postToDelete) post}}
+              class="child no-transition gray no-underline hover-dark-gray"
+              data-test-id='delete'>
               {{fa-icon "trash"}}
               <span class="f6">Delete</span>
             </a>
@@ -84,13 +87,19 @@
       {{/each}}
     </tbody>
   </table>
+
 {{else}}
+
   <p>No blog posts yet - get writing!</p>
+
 {{/if}}
 
+
 {{#if postToDelete}}
+
   {{confirm-delete-post
-    on-delete=(action "afterDelete")
     on-cancel=(action (mut postToDelete) null)
+    after-delete=(action (mut postToDelete) null)
     post=postToDelete}}
+
 {{/if}}

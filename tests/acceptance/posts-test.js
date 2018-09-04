@@ -21,17 +21,6 @@ module('Acceptance | posts', function(hooks) {
     assert.equal(findAll('tbody tr').length, 3);
   });
 
-  test("If there's a problem loading the posts, I see an error message", async function(assert) {
-    server.createList('post', 3);
-    server.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
-
-    await assert.asyncThrows(async () => {
-      return await visit('/posts');
-    }, 'GET /posts returned a 500');
-
-    assert.dom(testId('error')).hasText('The database is on vacation');
-  });
-
   test('I can edit a blog post', async function(assert) {
     let post = server.create('post', { title: 'Old post title' });
 
@@ -44,6 +33,30 @@ module('Acceptance | posts', function(hooks) {
     assert.dom('h1').hasText('New post title');
     assert.equal(post.title, 'New post title');
   });
+
+  test('I can delete a blog post', async function(assert) {
+    server.createList('post', 3);
+
+    await visit('/posts');
+
+    assert.dom(testId('post-row')).exists({ count: 3 });
+
+    await click(testId('delete'));
+    await click(testId('delete-post'));
+
+    assert.dom(testId('post-row')).exists({ count: 2 });
+  });
+
+  // test("If there's a problem loading the posts, I see an error message", async function(assert) {
+  //   server.createList('post', 3);
+  //   server.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
+  //
+  //   await assert.asyncThrows(async () => {
+  //     return await visit('/posts');
+  //   }, 'GET /posts returned a 500');
+  //
+  //   assert.dom(testId('error')).hasText('The database is on vacation');
+  // });
 
   // test('If editing a post fails, I see an error message', async function(assert) {
   //   server.create('post', { title: 'Old post title' });

@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { Styled } from 'ember-cli-ui-components';
 import { oneWay } from '@ember/object/computed';
 import { computed } from '@ember/object';
+import { task } from 'ember-concurrency';
 
 export default Component.extend(Styled, {
   tagName: '',
@@ -10,22 +11,26 @@ export default Component.extend(Styled, {
     return {};
   }),
 
-  disabled: oneWay('task.isRunning'),
+  disabled: oneWay('handleClick.isRunning'),
 
   task: null,
   onClick() {},
 
   actions: {
     click() {
-      let task = this.get('task');
-      let onClick = this.get('onClick');
-
-      if (task) {
-        task.perform();
-      } else {
-        onClick();
-      }
+      return this.get('handleClick').perform();
     }
-  }
+  },
+
+  handleClick: task(function*() {
+    let task = this.get('task');
+    let onClick = this.get('onClick');
+
+    if (task) {
+      yield task.perform();
+    } else {
+      yield onClick();
+    }
+  })
 
 });
