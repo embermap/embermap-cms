@@ -45,6 +45,7 @@ module('Acceptance | posts', function(hooks) {
     await click(testId('delete-post'));
 
     assert.dom(testId('post-row')).exists({ count: 2 });
+    assert.dom(testId('flash-message')).hasText('Post successfully deleted!');
   });
 
   // test("If there's a problem loading the posts, I see an error message", async function(assert) {
