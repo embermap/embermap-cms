@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { later } from '@ember/runloop';
 
 export default Component.extend({
   post: null,
@@ -16,7 +17,7 @@ export default Component.extend({
       return post.destroyRecord().then(() => {
         this.get('after-delete')();
 
-        setTimeout(() => {
+        later(() => {
           this.get('flashMessages').success('Post successfully deleted!');
         }, 1000);
       });
