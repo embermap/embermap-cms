@@ -1,5 +1,7 @@
 {{yield (hash
   label=(component 'ui-form/label')
   input=(component 'ui-form/input')
-  submit=(component 'ui-button')
+  submit=(component 'ui-button'
+    onClick=onSubmit
+    type="submit")
 )}}

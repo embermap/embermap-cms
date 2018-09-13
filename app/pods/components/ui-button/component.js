@@ -10,13 +10,17 @@ export default Component.extend(Styled, {
     return {};
   }),
 
+  type: "button",
+
   disabled: oneWay('task.isRunning'),
 
   task: null,
   onClick() {},
 
   actions: {
-    click() {
+    click(event) {
+      event.preventDefault();
+
       let task = this.get('task');
       let onClick = this.get('onClick');
 
