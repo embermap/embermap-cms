@@ -1,0 +1,65 @@
+/**
+ * You can create new utilities here.
+ *
+ * Feel free to rename this file, define multiple utilities here, or make
+ * any other files in this directory.
+
+ * Here's an example:
+**/
+
+/* .skew-45 {
+  transform: skewY(45deg);
+} */
+
+.f8 {
+  font-size: 10px;
+}
+
+.bullets {
+  list-style: disc;
+  margin-left: 30px;
+}
+
+.mla {
+  margin-left: auto;
+}
+
+.no-events {
+  pointer-events: none;
+}
+
+.transition {
+  transition: all 0.15s;
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+.vw-100 {
+  width: 100vw;
+}
+
+// tachyons dim!
+.dim {
+  opacity: 1;
+  transition: opacity .15s ease-in;
+}
+.dim:hover,
+.dim:focus {
+  opacity: .5;
+  transition: opacity .15s ease-in;
+}
+.dim:active {
+  opacity: .8; transition: opacity .15s ease-out;
+}
+
+// glow!
+.glow {
+  transition: opacity .15s ease-in;
+}
+.glow:hover,
+.glow:focus {
+  opacity: 1;
+  transition: opacity .15s ease-in;
+}

@@ -1,9 +1,9 @@
 {{!-- Breadcrumbs --}}
-<div class="f7">
-  {{#link-to 'tags' class='link silver ttu dim'}}
+<div class="text-xs">
+  {{#link-to 'tags' class='no-underline text-grey-dark uppercase dim'}}
     Tags
   {{/link-to}}
-  <span class='moon-gray'>
+  <span class='text-grey-lighter'>
     /
   </span>
 </div>
@@ -12,8 +12,8 @@
 
 <ul class='bullets'>
   {{#each (sort-by 'date' model.posts) as |post|}}
-    <li class='mb2'>
-      {{#link-to 'posts.post' post.id class='link near-black dim'}}
+    <li class='mb-2'>
+      {{#link-to 'posts.post' post.id class='no-underline text-black dim'}}
         <em class='i'>{{post.title}}</em> by {{post.author}}
       {{/link-to}}
     </li>

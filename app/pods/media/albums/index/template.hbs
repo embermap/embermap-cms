@@ -2,10 +2,11 @@
 
 <div class="flex flex-wrap">
   {{#each (sort-by 'id' model) as |album|}}
-    {{#link-to 'media.albums.album.index' album class='db w4 mb3 mr3 link gray dim'}}
+    {{#link-to 'media.albums.album.index' album
+      class='block w-32 mb-3 mr-3 no-underline text-grey-dark dim'}}
       <img src={{album.images.firstObject.url}}
-        class='w4 h4 br2 ba b--moon-gray'>
-      <p class='pv2 tc lh-copy'>{{album.title}}</p>
+        class='w-32 h-32 rounded border border-grey'>
+      <p class='py-2 text-center leading-normal'>{{album.title}}</p>
     {{/link-to}}
   {{/each}}
 </div>

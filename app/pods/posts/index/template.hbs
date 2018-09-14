@@ -5,31 +5,31 @@
 {{/if}}
 
 {{#if model}}
-  <div class="flex tc">
-    <div class="flex-auto ph4">
+  <div class="flex text-center">
+    <div class="flex-auto px-8">
       {{bar-chart data=authorData
         selectedLabel=selectedAuthor
         on-click=(action 'toggleBar' 'selectedAuthor')}}
 
-      <h2 class='f5 mt3 mb4'>
+      <h2 class='text-base font-normal mt-4 mb-8'>
         Authors
       </h2>
     </div>
-    <div class="flex-auto ph4">
+    <div class="flex-auto px-8">
       {{bar-chart data=categoryData color='green'
         selectedLabel=selectedCategory
         on-click=(action 'toggleBar' 'selectedCategory')}}
 
-      <h2 class='f5 mt3 mb4'>
+      <h2 class='text-base font-normal mt-4 mb-8'>
         Categories
       </h2>
     </div>
-    <div class="flex-auto ph4">
+    <div class="flex-auto px-8">
       {{bar-chart data=commentsData color='red'
         selectedLabel=selectedPost
         on-click=(action 'toggleBar' 'selectedPost')}}
 
-      <h2 class='f5 mt3 mb4'>
+      <h2 class='text-base font-normal mt-4 mb-8'>
         Comments
       </h2>
     </div>
@@ -37,7 +37,7 @@
 {{/if}}
 
 {{#if model}}
-  <table class='lh-title'>
+  <table class='leading-tight'>
     <thead>
       <tr>
         <th>
@@ -64,18 +64,20 @@
       {{keyboard-press key="Enter" on-press=(action "openPost" navigatedPost)}}
 
       {{#each posts as |post|}}
-        <tr class="hide-child" class="bl bw2 {{if (eq post navigatedPost) 'b--blue' 'b--transparent'}}">
+        <tr class="
+          group
+          border-l-4 {{if (eq post navigatedPost) 'border-blue' 'border-transparent'}}">
           <td>
-            {{#link-to 'posts.post' post.id class='link dark-gray dim'}}
+            {{#link-to 'posts.post' post.id class='no-underline text-grey-darkest'}}
               {{post.title}}
             {{/link-to}}
           </td>
           <td>{{moment-format post.date 'MMM D, YYYY'}}</td>
           <td>{{post.author}}</td>
           <td>{{tag-list tags=post.tags}}</td>
-          <td class="tr">
+          <td class="text-right">
             <a href="#" {{action "showDelete" post}}
-              class="child no-transition gray no-underline">
+              class="hidden group-hover:block no-transition text-grey-dark no-underline">
               {{fa-icon "trash"}}
               <span class="f6">Delete</span>
             </a>

@@ -1,20 +1,20 @@
-<div class="flex items-center mb4">
-  <h1 class='mt0 mb0 dib mr3'>Photo styles</h1>
+<div class="flex items-center mb-8">
+  <h1 class='mt-0 mb-0 inline-block mr-4'>Photo styles</h1>
 
   {{#link-to 'media.styles.style' 'light'
-    class='flex link b silver pb2 mr3 bb bw1 b--transparent'
-    activeClass='b--inherit'}}
-    <div class='dib w1 h1 mr2 bg-light-silver'></div>
-    <p class='dib ma0 f6'>
+    class='flex no-underline text-bold text-grey-dark mr-4 border-bottom border-color-transparent'
+    activeClass='border-color-inherit'}}
+    <div class='inline-block w-4 h-4 mr-2 bg-grey'></div>
+    <p class='inline-block m-0 text-sm'>
       LIGHT
     </p>
   {{/link-to}}
 
   {{#link-to 'media.styles.style' 'dark'
-    class='flex link b near-black pb2 bb bw1 b--transparent'
-    activeClass='b--inherit'}}
-    <div class='dib w1 h1 mr2 bg-near-black'></div>
-    <p class='dib ma0 f6'>
+    class='flex no-underline text-bold text-black border-bottom-1 border-color-transparent'
+    activeClass='border-color-inherit'}}
+    <div class='inline-block w-4 h-4 mr-2 bg-black'></div>
+    <p class='inline-block m-0 text-sm'>
       DARK
     </p>
   {{/link-to}}
