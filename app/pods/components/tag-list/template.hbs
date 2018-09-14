@@ -1,5 +1,10 @@
 {{#each (sort-by 'name' tags) as |tag|}}
-  {{#link-to 'tags.tag' tag.slug class='dib transition mr1 near-black link f8 fw5 ttu br-pill bg-light-gray hover-bg-moon-gray ph2 pv1'}}
+  {{#link-to 'tags.tag' tag.slug
+    class='
+      inline-block no-underline transition mr-1
+      text-black text-10px font-medium uppercase
+      rounded-full bg-grey-lighter hover:bg-grey-light
+      px-2 py-1'}}
     {{tag.name}}
   {{/link-to}}
 {{/each}}

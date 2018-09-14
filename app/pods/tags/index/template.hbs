@@ -2,8 +2,8 @@
 
 <ul class='bullets'>
   {{#each model as |tag|}}
-    <li class='mb2'>
-      {{#link-to 'tags.tag' tag.slug class='link near-black dim'}}
+    <li class='mb-2'>
+      {{#link-to 'tags.tag' tag.slug class='no-underline text-black'}}
         {{tag.name}} ({{tag.posts.length}} {{inflect-word 'posts' tag.posts.length}})
       {{/link-to}}
     </li>
