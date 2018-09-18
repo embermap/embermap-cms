@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { Styled } from 'ember-cli-ui-components';
+import { Styled, group } from 'ember-cli-ui-components';
 import { oneWay } from '@ember/object/computed';
 import { computed } from '@ember/object';
 
@@ -7,7 +7,14 @@ export default Component.extend(Styled, {
   tagName: '',
 
   styles: computed(function() {
-    return {};
+    return {
+      defaultStyle: 'blue',
+
+      colors: group({
+        blue: 'bg-blue text-white',
+        gray: 'bg-grey-lighter text-black'
+      })
+    };
   }),
 
   type: "button",

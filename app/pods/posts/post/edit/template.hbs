@@ -17,6 +17,10 @@
       Save
     {{/ui-button}}
 
+    {{#ui-button task=save style="gray" data-test-id="save"}}
+      Cancel
+    {{/ui-button}}
+
     {{#if save.last.isError}}
       <p class='mt-4 text-red' data-test-id="error">
         {{fa-icon 'exclamation-circle'}}
