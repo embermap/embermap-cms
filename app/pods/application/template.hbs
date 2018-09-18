@@ -15,28 +15,28 @@
   </header>
 
   <main class='app-main'>
-    <section class='side-panel'>
-      {{#link-to 'dashboard'}}
-        Dashboard
-      {{/link-to}}
-      {{#link-to 'posts'}}
-        Blog posts
-      {{/link-to}}
-      {{#link-to 'tags'}}
-        Tags
-      {{/link-to}}
-      {{#link-to 'media'}}
-        Media
-      {{/link-to}}
-      {{#link-to 'comments'}}
-        Comments
-      {{/link-to}}
-    </section>
+    {{#if isShowingNav}}
+      <section class='side-panel'>
+        {{#link-to 'dashboard'}}
+          Dashboard
+        {{/link-to}}
+        {{#link-to 'posts'}}
+          Blog posts
+        {{/link-to}}
+        {{#link-to 'tags'}}
+          Tags
+        {{/link-to}}
+        {{#link-to 'media'}}
+          Media
+        {{/link-to}}
+        {{#link-to 'comments'}}
+          Comments
+        {{/link-to}}
+      </section>
+    {{/if}}
 
     <section class='center-panel'>
-
       {{outlet}}
-
     </section>
   </main>
 </div>

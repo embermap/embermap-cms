@@ -1,9 +1,10 @@
 @import 'tailwind';
+@import "ember-modal-dialog/ember-modal-structure";
+// @import "ember-modal-dialog/ember-modal-appearance";
 
 @import 'pod-styles';
 // @import './reset';
 // @import './tachyons';
-@import 'tailwind';
 
 
 body {

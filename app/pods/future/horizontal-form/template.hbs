@@ -1,0 +1,88 @@
+{{!-- {{#ui-modal as |modal|}}
+
+  <h1 class='text-2xl p-0 m-0'>
+    Sign in to your account
+  </h1>
+
+  <form class='mt-8'>
+
+    <div class="flex items-center">
+      <div class="w-1/5 text-right pr-4">
+        <label class="mb-2 block text-grey-darker" >
+          Email
+        </label>
+      </div>
+      <div class="w-4/5">
+        <input class="mb-2 p-2 border rounded block w-full"
+          placeholder="you@example.com">
+      </div>
+    </div>
+
+    <div class='flex items-center mt-2'>
+      <div class="w-1/5 text-right pr-4">
+        <label class="mb-2 block text-grey-darker" >
+          Password
+        </label>
+      </div>
+      <div class="w-4/5">
+        <input class="mb-2 p-2 border rounded block w-full"
+          type="password"
+          placeholder="********">
+      </div>
+    </div>
+
+
+  </form>
+
+
+{{/ui-modal}} --}}
+
+{{#ui-modal as |modal|}}
+
+  <h1 class='text-2xl p-0 m-0'>
+    Sign in to your account
+  </h1>
+
+  {{#ui-form class='mt-8' as |form|}}
+
+    <div class="flex items-center">
+      <div class="w-1/5 text-right pr-4">
+        {{#form.label class="mb-2 block text-grey-darker" }}
+          Email
+        {{/form.label}}
+      </div>
+      <div class="w-4/5">
+        {{form.input class="mb-2 p-2 border rounded block w-full"
+          placeholder="you@example.com"}}
+      </div>
+    </div>
+
+    <div class='flex items-center mt-2'>
+      <div class="w-1/5 text-right pr-4">
+        {{#form.label class="mb-2 block text-grey-darker" }}
+          Password
+        {{/form.label}}
+      </div>
+      <div class="w-4/5">
+        {{form.input class="mb-2 p-2 border rounded block w-full"
+          type="password"}}
+      </div>
+    </div>
+
+    <div class="mt-3 text-right">
+      <span class='mr-3'>
+        {{#ui-button style="gray" onClick=(action (mut name) "")}}
+          Cancel
+        {{/ui-button}}
+      </span>
+
+      {{#form.submit}}
+        Sign in
+      {{/form.submit}}
+
+    </div>
+
+  {{/ui-form}}
+
+
+{{/ui-modal}}

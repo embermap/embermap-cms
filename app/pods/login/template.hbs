@@ -1,0 +1,40 @@
+{{#ui-modal as |modal|}}
+
+  <h1 class='text-grey-darkest text-2xl p-0 m-0'>
+    Sign in to your account
+  </h1>
+
+  <form class='mt-6'>
+
+    <div class="mb-4">
+      <label class="text-sm font-semibold block text-grey-darkest" >
+        Email
+
+        <input class="mt-1 p-2 border rounded w-full" placeholder="you@example.com">
+      </label>
+
+    </div>
+
+    <div class="mb-4">
+      <label class="text-sm font-semibold block text-grey-darkest" >
+        Password
+
+        <input class="mt-1 p-2 border rounded w-full" type="password">
+      </label>
+
+    </div>
+
+    <div class="mt-4 text-right">
+      {{#ui-button style="gray"}}
+        Cancel
+      {{/ui-button}}
+
+      {{#ui-button}}
+        Log in
+      {{/ui-button}}
+    </div>
+
+  </form>
+
+
+{{/ui-modal}}

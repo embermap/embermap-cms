@@ -1,19 +1,22 @@
 {{#ui-form onSubmit=(action "save") as |form|}}
 
-  {{#form.label}}
+  {{#form.label class="mb-2 text-grey block"}}
     my label
   {{/form.label}}
 
   {{form.input
     value=name
-    placeholder="my input"}}
+    placeholder="my input"
+    class="mb-2 p-2 border rounded"}}
 
-  {{#ui-button onClick=(action (mut name) "")}}
-    Reset
-  {{/ui-button}}
+  <div class="mt-3">
+    {{#form.submit}}
+      Save
+    {{/form.submit}}
 
-  {{#form.submit}}
-    save
-  {{/form.submit}}
+    {{#ui-button style="gray" onClick=(action (mut name) "")}}
+      Reset
+    {{/ui-button}}
+  </div>
 
 {{/ui-form}}
