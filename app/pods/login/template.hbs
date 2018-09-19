@@ -4,24 +4,22 @@
     Sign in to your account
   </h1>
 
-  <form class='mt-6'>
+  {{#ui-form onSubmit=(action "login") class='mt-6' as |form|}}
 
     <div class="mb-4">
-      <label class="text-sm font-semibold block text-grey-darkest" >
+      {{#form.label class="text-sm font-semibold block text-grey-darkest"}}
         Email
 
-        <input class="mt-1 p-2 border rounded w-full" placeholder="you@example.com">
-      </label>
-
+        {{form.input class="mt-1 p-2 border rounded w-full" placeholder="you@example.com"}}
+      {{/form.label}}
     </div>
 
     <div class="mb-4">
-      <label class="text-sm font-semibold block text-grey-darkest" >
+      {{#form.label class="text-sm font-semibold block text-grey-darkest"}}
         Password
 
-        <input class="mt-1 p-2 border rounded w-full" type="password">
-      </label>
-
+        {{form.input class="mt-1 p-2 border rounded w-full" type="password"}}
+      {{/form.label}}
     </div>
 
     <div class="mt-4 text-right">
@@ -29,12 +27,12 @@
         Cancel
       {{/ui-button}}
 
-      {{#ui-button}}
+      {{#form.submit}}
         Log in
-      {{/ui-button}}
+      {{/form.submit}}
     </div>
 
-  </form>
+  {{/ui-form}}
 
 
 {{/ui-modal}}
