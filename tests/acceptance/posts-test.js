@@ -1,13 +1,18 @@
-import { click, fillIn, findAll, currentURL, visit } from '@ember/test-helpers';
+import {
+  click,
+  fillIn,
+  currentURL,
+  visit
+} from '@ember/test-helpers';
 import testId from '../helpers/test-id';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+// import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { assertionInjector } from '../assertions';
 
 module('Acceptance | posts', function(hooks) {
   setupApplicationTest(hooks);
-  setupMirage(hooks);
+  // setupMirage(hooks);
 
   hooks.beforeEach(function() {
     assertionInjector(this.owner);
@@ -18,7 +23,7 @@ module('Acceptance | posts', function(hooks) {
 
     await visit('/posts');
 
-    assert.equal(findAll('tbody tr').length, 3);
+    assert.dom('tbody tr').exists({ count: 3 });
   });
 
   test('I can edit a blog post', async function(assert) {

@@ -5,7 +5,7 @@ export default Route.extend({
   model(params) {
     let slug = params.tag_slug;
 
-    return this.get('store')
+    return this.store
       .query('tag', {
         filter: { slug },
         include: 'posts'

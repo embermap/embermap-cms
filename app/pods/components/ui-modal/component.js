@@ -22,7 +22,7 @@ export default Component.extend({
 
     $('body').on('keyup.modal-dialog', (e) => {
       if (e.keyCode === 27) {
-        this.get('onClose')();
+        this.onClose();
       }
     });
   },
