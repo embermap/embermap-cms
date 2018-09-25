@@ -1,0 +1,9 @@
+{{#if items}}
+  <ul>
+    {{#each items as |item|}}
+      <li>{{item.name}} - ⭐️ {{item.stargazers_count}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>Loading repositories...</p>
+{{/if}}

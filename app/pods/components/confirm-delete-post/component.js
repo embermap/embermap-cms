@@ -12,13 +12,13 @@ export default Component.extend({
 
   actions: {
     deletePost() {
-      let post = this.get('post');
+      let post = this.post;
 
       return post.destroyRecord().then(() => {
-        this.get('after-delete')();
+        this['after-delete']();
 
         later(() => {
-          this.get('flashMessages').success('Post successfully deleted!');
+          this.flashMessages.success('Post successfully deleted!');
         }, 1000);
       });
     }

@@ -8,13 +8,13 @@ export default Component.extend({
   store: service(),
 
   loadTags: task(function*() {
-    return yield this.get('store').findAll('tag');
+    return yield this.store.findAll('tag');
   }).on('init'),
 
   tags: readOnly('loadTags.lastSuccessful.value'),
 
   toggleTag: task(function*(tag) {
-    let post = this.get('post');
+    let post = this.post;
     let tags = post.get('tags');
 
     if (tags.includes(tag)) {

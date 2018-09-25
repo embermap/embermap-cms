@@ -10,8 +10,8 @@ export default Component.extend(EKMixin, {
 
     this.set('keyboardActivated', true);
 
-    let key = this.get('key');
-    let action = this.get('on-press');
+    let key = this.key;
+    let action = this['on-press'];
 
     this.on(keyDown(key), action);
   },

@@ -18,13 +18,13 @@ export default Component.extend(Styled, {
 
   actions: {
     click() {
-      return this.get('handleClick').perform();
+      return this.handleClick.perform();
     }
   },
 
   handleClick: task(function*() {
-    let task = this.get('task');
-    let onClick = this.get('onClick');
+    let task = this.task;
+    let onClick = this.onClick;
 
     if (task) {
       yield task.perform();
