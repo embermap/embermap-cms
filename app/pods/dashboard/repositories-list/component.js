@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import fetch from 'fetch';
 
 export default Component.extend({
 

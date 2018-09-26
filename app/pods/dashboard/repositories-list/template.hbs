@@ -1,7 +1,7 @@
 {{#if items}}
   <ul>
     {{#each items as |item|}}
-      <li>{{item.name}} - ⭐️ {{item.stargazers_count}}</li>
+      <li data-test-id="repository">{{item.name}} - ⭐️ {{item.stargazers_count}}</li>
     {{/each}}
   </ul>
 {{else}}
