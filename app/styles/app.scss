@@ -50,7 +50,8 @@ body {
     padding: 20px;
     border-bottom: 1px solid #bbb;
 
-    &.active {
+    &.active:not(.ember-transitioning-out),
+    &.ember-transitioning-in {
       background: white;
       border-right: 5px solid #2196f3;
     }
