@@ -11,9 +11,9 @@ export default Component.extend({
   flashMessages: service(),
 
   deletePost: task(function*() {
-    let post = this.get('post');
+    let post = this.post;
 
     yield post.destroyRecord();
-    this.get('on-delete')();
+    this['on-delete']();
   })
 });

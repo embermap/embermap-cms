@@ -1,4 +1,10 @@
-import { click, fillIn, findAll, currentURL, visit } from '@ember/test-helpers';
+import {
+  click,
+  fillIn,
+  findAll,
+  currentURL,
+  visit
+} from '@ember/test-helpers';
 import testId from '../helpers/test-id';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
@@ -18,7 +24,7 @@ module('Acceptance | posts', function(hooks) {
 
     await visit('/posts');
 
-    assert.equal(findAll('tbody tr').length, 3);
+    assert.dom('tbody tr').exists({ count: 3 });
   });
 
   test("If there's a problem loading the posts, I see an error message", async function(assert) {

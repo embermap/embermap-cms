@@ -13,16 +13,16 @@ export default Controller.extend({
 
   activeSortBy: 'date:desc',
   postsSorting: computed('activeSortBy', function() {
-    return [ this.get('activeSortBy') ];
+    return [ this.activeSortBy ];
   }),
   sortedPosts: sort('model', 'postsSorting'),
 
   posts: computed('sortedPosts.[]', 'selectedAuthor', 'selectedCategory', 'selectedPost', function() {
-    let selectedAuthor = this.get('selectedAuthor');
-    let selectedCategory = this.get('selectedCategory');
-    let selectedPost = this.get('selectedPost');
+    let selectedAuthor = this.selectedAuthor;
+    let selectedCategory = this.selectedCategory;
+    let selectedPost = this.selectedPost;
 
-    return this.get('sortedPosts')
+    return this.sortedPosts
       .filter(post => selectedAuthor ? post.get('author') === selectedAuthor : true)
       .filter(post => selectedCategory ? post.get('category') === selectedCategory : true)
       .filter(post => selectedPost ? post.get('title') === selectedPost : true);
@@ -59,7 +59,7 @@ export default Controller.extend({
     },
 
     sort(field) {
-      if (field === this.get('activeSortBy')) {
+      if (field === this.activeSortBy) {
         this.set('activeSortBy', `${field}:desc`);
       } else {
         this.set('activeSortBy', field);
@@ -80,7 +80,7 @@ export default Controller.extend({
       this.set('postToDelete', null);
 
       later(() => {
-        this.get('flashMessages').success('Post successfully deleted!');
+        this.flashMessages.success('Post successfully deleted!');
       }, 1000);
     },
 

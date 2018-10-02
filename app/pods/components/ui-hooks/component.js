@@ -10,13 +10,13 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.get('did-insert')();
+    this['did-insert']();
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    this.get('will-destroy')();
+    this['will-destroy']();
   },
 
 });

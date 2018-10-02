@@ -25,13 +25,13 @@ export default Component.extend({
 
   tooltipTarget: computed('didRenderChart', 'highlightedLabel', function() {
     return select(this.$('svg')[0]).selectAll('rect')
-      .filter(data => data.label === this.get('highlightedLabel'))
+      .filter(data => data.label === this.highlightedLabel)
       .node();
   }),
 
   didInsertElement() {
     this.set('yScale', scaleLinear().range([ 0, 100 ]));
-    this.set('colorScale', scaleLinear().range(COLORS[this.get('color')]));
+    this.set('colorScale', scaleLinear().range(COLORS[this.color]));
     this.set('xScale', scaleBand().range([ 0, 100 ]).paddingInner(0.12));
 
     this.renderChart();
@@ -43,12 +43,12 @@ export default Component.extend({
   },
 
   renderChart() {
-    let data = this.get('data').sortBy('label');
+    let data = this.data.sortBy('label');
     let counts = data.map(data => data.count);
 
-    this.get('yScale').domain([ 0, Math.max(...counts) ]);
-    this.get('colorScale').domain([ 0, Math.max(...counts) ]);
-    this.get('xScale').domain(data.map(data => data.label));
+    this.yScale.domain([ 0, Math.max(...counts) ]);
+    this.colorScale.domain([ 0, Math.max(...counts) ]);
+    this.xScale.domain(data.map(data => data.label));
 
     let svg = select(this.$('svg')[0]);
     let barsUpdate = svg.selectAll('rect').data(data, data => data.label);
@@ -61,13 +61,13 @@ export default Component.extend({
     barsEnter
       .merge(barsUpdate)
       .transition()
-      .attr('width', `${this.get('xScale').bandwidth()}%`)
-      .attr('height', data => `${this.get('yScale')(data.count)}%`)
-      .attr('x', data => `${this.get('xScale')(data.label)}%`)
-      .attr('y', data => `${100 - this.get('yScale')(data.count)}%`)
-      .attr('fill', data => this.get('colorScale')(data.count))
+      .attr('width', `${this.xScale.bandwidth()}%`)
+      .attr('height', data => `${this.yScale(data.count)}%`)
+      .attr('x', data => `${this.xScale(data.label)}%`)
+      .attr('y', data => `${100 - this.yScale(data.count)}%`)
+      .attr('fill', data => this.colorScale(data.count))
       .attr('opacity', data => {
-        let selected = this.get('selectedLabel');
+        let selected = this.selectedLabel;
 
         return (selected && data.label !== selected) ? '0.5' : '1.0';
       })
@@ -100,10 +100,10 @@ export default Component.extend({
       .on('click', data => {
         let clickedLabel = data.label;
 
-        if (this.get('on-click')) {
-          this.get('on-click')(clickedLabel);
+        if (this['on-click']) {
+          this['on-click'](clickedLabel);
         } else {
-          if (clickedLabel === this.get('selectedLabel')) {
+          if (clickedLabel === this.selectedLabel) {
             this.set('selectedLabel', '');
           } else {
             this.set('selectedLabel', clickedLabel);

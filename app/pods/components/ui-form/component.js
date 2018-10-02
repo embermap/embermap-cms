@@ -7,6 +7,6 @@ export default Component.extend({
 
   submit(event) {
     event.preventDefault();
-    this.get('onSubmit')();
+    this.onSubmit();
   }
 });

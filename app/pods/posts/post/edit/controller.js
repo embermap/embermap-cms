@@ -7,8 +7,8 @@ export default Controller.extend({
   router: service(),
 
   save: task(function*() {
-    yield this.get('model').save();
-    yield this.get('router').transitionTo('posts.post.index');
+    yield this.model.save();
+    yield this.router.transitionTo('posts.post.index');
   })
 
 });

@@ -28,8 +28,8 @@ export default Component.extend(Styled, {
     click(event) {
       event.preventDefault();
 
-      let task = this.get('task');
-      let onClick = this.get('onClick');
+      let task = this.task;
+      let onClick = this.onClick;
 
       if (task) {
         task.perform();
