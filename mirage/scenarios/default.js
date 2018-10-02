@@ -48,6 +48,8 @@ export default function(server) {
   server.createList('post', 4, { author: 'Anika Keeling' });
   server.createList('post', 7, { author: 'Chelsea Orn' });
 
+  server.createList('user', 10);
+
   // Media data creation
   let city = server.create('album', {
     title: 'City living',

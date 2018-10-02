@@ -19,6 +19,7 @@ Router.map(function() {
     this.route('tag', { path: '/:tag_slug' });
   });
 
+  this.route('users');
   this.route('media', function() {
     this.route('styles', function() {
       this.route('style', { path: '/:style' });

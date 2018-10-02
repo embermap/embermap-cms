@@ -11,6 +11,7 @@ export default function() {
   this.resource('tags');
   this.resource('posts');
   // this.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
+  this.resource('users');
 
   this.patch('/posts/:id', function(schema, request) {
     let post = schema.posts.find(request.params.id);
