@@ -34,5 +34,8 @@
 
   {{/ui-form}}
 
-
 {{/ui-modal}}
+
+{{ui-hooks
+  did-insert=(action (mut application.isShowingNav) false)
+  will-destroy=(action (mut application.isShowingNav) true)}}
