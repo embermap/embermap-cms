@@ -8,7 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('login');
-  
+
   this.route('dashboard', { path: '/' });
   this.route('posts', function() {
     this.route('post', { path: '/:post_id' }, function() {
@@ -34,6 +34,9 @@ Router.map(function() {
 
   this.route('forms');
 
+  this.route('designs', function() {
+    this.route('blog-post-edit-form');
+  });
 
   this.route('styleguide', function() {
     this.route('components', function() {

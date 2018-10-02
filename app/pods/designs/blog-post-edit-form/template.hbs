@@ -1,0 +1,42 @@
+<form class='mt-8'>
+
+  <div class="flex items-center">
+    <div class="w-1/5 max-w-xs text-right pr-4">
+      <label class="mb-2 block text-grey-darker">
+        Title
+      </label>
+    </div>
+    <div class="w-4/5">
+      <input
+        class="mb-2 p-2 border rounded block w-full"
+        placeholder="you@example.com">
+    </div>
+  </div>
+
+  <div class='flex items-center mt-2'>
+    <div class="w-1/5 text-right pr-4">
+      <label class="mb-2 block text-grey-darker">
+        Post
+      </label>
+    </div>
+    <div class="w-4/5">
+      <input
+        class="mb-2 p-2 border rounded block w-full"
+        type="password">
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <span class='mr-3'>
+      {{#ui-button style="gray" onClick=(action (mut name) "")}}
+        Cancel
+      {{/ui-button}}
+    </span>
+
+    {{#form.submit}}
+      Save
+    {{/form.submit}}
+
+  </div>
+
+</form>
