@@ -1,0 +1,19 @@
+{{#ui-form onSubmit=(action "save") as |form|}}
+
+  {{#form.label}}
+    my label
+  {{/form.label}}
+
+  {{form.input
+    value=name
+    placeholder="my input"}}
+
+  {{#form.submit}}
+    Save
+  {{/form.submit}}
+
+  {{#ui-button onClick=(action (mut name) "")}}
+    Reset
+  {{/ui-button}}
+
+{{/ui-form}}

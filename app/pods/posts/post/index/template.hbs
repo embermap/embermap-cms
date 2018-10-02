@@ -1,21 +1,25 @@
 <div class="flex items-center">
   <h1 data-test-id="title">{{model.title}}</h1>
 
-  <p class='pl4'>
-    {{#link-to 'posts.post.edit' model.id class='dim link silver'}}
+  <p class='pl-8'>
+    {{#link-to 'posts.post.edit' model.id class='dim no-underline text-grey-dark'}}
       Edit post
     {{/link-to}}
   </p>
 </div>
 
-<div class="flex mb3 items-center">
-  <p class='mr1'>
+<div class="flex mb-4 items-center">
+  <p class='mr-1'>
     Tags:
   </p>
 
-  <span class='mr2'>
+  <span class='mr-2'>
     <a {{action (toggle 'isEditingTags' this)}}
-      class='link silver br1 f7 dib flex items-center justify-center w2 h2 hover-near-black'
+      class='
+        no-underline text-grey-dark rounded-sm
+        text-xs inline-block
+        flex items-center justify-center
+        w-8 h-8 hover:text-black'
       href="#"
       data-modal-attach-id='tag-list'>
       {{fa-icon 'pencil'}}
@@ -25,9 +29,9 @@
   {{tag-list tags=model.tags}}
 </div>
 
-<hr class='bt-0 mv3'>
+<hr class='border-top-0 my-4'>
 
-<div class='lh-copy'>
+<div class='leading-normal'>
   {{{model.text}}}
 </div>
 
@@ -35,13 +39,13 @@
   Activity
 </h2>
 
-<div class="lh-copy">
+<div class="leading-normal">
   <ul>
     {{#each (sort-by 'createdAt:desc' model.activities) as |activity|}}
       <li>
         &middot;
         {{activity.text}}
-        <span class='pl2 silver'>{{moment-from-now activity.createdAt}}</span>
+        <span class='pl-2 text-grey-dark'>{{moment-from-now activity.createdAt}}</span>
       </li>
     {{/each}}
   </ul>
@@ -54,7 +58,7 @@
   {{/if}}
 </h2>
 
-<div class='lh-copy'>
+<div class='leading-normal'>
   {{#if model.comments}}
     <ul>
       {{#each model.comments as |comment|}}

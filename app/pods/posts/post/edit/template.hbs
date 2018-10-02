@@ -1,22 +1,28 @@
-<div class="flex mt3">
-  <div class="w-75">
-    <h1 class='mt0 w-100'>
-      {{input value=model.title class='w-100 pa2'}}
+<div class="flex mt-4">
+  <div class="w-3/4">
+    <h1 class='mt-0 w-full'>
+      {{input
+        value=model.title
+        class='w-full p-2 border border-grey-lighter'}}
     </h1>
 
-    <div class="mt3">
+    <div class="mt-4">
       {{textarea value=model.text rows=20
-        class='pa2 b--light-gray w-100'}}
+        class='p-2 border border-grey-lighter w-full'}}
     </div>
   </div>
 
-  <div class="w-25 pl4">
+  <div class="w-1/4 pl-8">
     {{#ui-button task=save data-test-id="save"}}
       Save
     {{/ui-button}}
 
+    {{#ui-button task=save style="gray" data-test-id="save"}}
+      Cancel
+    {{/ui-button}}
+
     {{#if save.last.isError}}
-      <p class='mt3 red' data-test-id="error">
+      <p class='mt-4 text-red' data-test-id="error">
         {{fa-icon 'exclamation-circle'}}
         Whoops - your post was not saved. Please try again!
       </p>

@@ -11,32 +11,46 @@
 
 <div class='app'>
   <header class='app-header'>
-    Acme, Inc.
+    <div class="flex items-center">
+      <div>
+        Acme, Inc.
+      </div>
+
+      <div class="ml-auto opacity-50 cursor-pointer">
+        <a {{action (toggle "isShowingSpeedControl" this)}}>
+          {{fa-icon "gear"}}
+        </a>
+      </div>
+    </div>
   </header>
 
   <main class='app-main'>
-    <section class='side-panel'>
-      {{#link-to 'dashboard'}}
-        Dashboard
-      {{/link-to}}
-      {{#link-to 'posts'}}
-        Blog posts
-      {{/link-to}}
-      {{#link-to 'tags'}}
-        Tags
-      {{/link-to}}
-      {{#link-to 'media'}}
-        Media
-      {{/link-to}}
-      {{#link-to 'comments'}}
-        Comments
-      {{/link-to}}
-    </section>
+    {{#if isShowingNav}}
+      <section class='side-panel'>
+        {{#link-to 'dashboard'}}
+          Dashboard
+        {{/link-to}}
+        {{#link-to 'posts'}}
+          Blog posts
+        {{/link-to}}
+        {{#link-to 'tags'}}
+          Tags
+        {{/link-to}}
+        {{#link-to 'media'}}
+          Media
+        {{/link-to}}
+        {{#link-to 'comments'}}
+          Comments
+        {{/link-to}}
+      </section>
+    {{/if}}
 
     <section class='center-panel'>
-
       {{outlet}}
-
     </section>
   </main>
 </div>
+
+{{#if isShowingSpeedControl}}
+  {{speed-control}}
+{{/if}}

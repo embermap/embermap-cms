@@ -2,13 +2,16 @@
   onclick={{action "click"}}
   disabled={{disabled}}
   data-test-id={{data-test-id}}
+  type={{type}}
   class="
-    leading-tight inline-block mb3 pointer f5 pv2 ph3 br2 fw3 bn bg-blue white
-    {{if disabled 'o-50' 'dim'}}
+    leading-tight inline-block
+    mb-4 pointer text-base py-2 px-3 rounded font-light border-0
+    {{activeClasses}}
+    {{if disabled 'opacity-50' 'dim'}}
     ">
 
   {{#if task.isRunning}}
-    <div class="dib mr1">
+    <div class="inline-block mr-1">
       {{ui-spinner}}
     </div>
   {{/if}}
