@@ -51,7 +51,8 @@
 
 {{/if}}
 
-{{#if isShowingAddUser}}
+{{!-- {{#if isShowingAddUser}} --}}
+{{#if true}}
   {{#ui-modal onClose=(action (mut isShowingAddUser) false) as |modal|}}
     <h1 class='text-grey-darkest text-2xl p-0 m-0'>
       Add a user
@@ -59,31 +60,36 @@
 
     <form class='mt-8'>
 
-      <div class="flex items-center">
-        <div class="w-1/5 text-right pr-4">
-          <label for='firstname' class="mb-2 block text-grey-darker">
-            First name
-          </label>
+      {{#let "firstname" as |id|}}
+        <div class="flex items-center">
+          <div class="w-1/5 text-right pr-4">
+            <label for={{id}} class="mb-2 block text-grey-darker">
+              First name
+            </label>
+          </div>
+          <div class="w-4/5">
+            <input id={{id}}
+              class="mb-2 p-2 border rounded block w-full"
+              placeholder="Alice">
+          </div>
         </div>
-        <div class="w-4/5">
-          <input id='firstname'
-            class="mb-2 p-2 border rounded block w-full"
-            placeholder="Alice">
-        </div>
-      </div>
+      {{/let}}
 
-      <div class="flex items-center">
-        <div class="w-1/5 text-right pr-4">
-          <label for='lastname' class="mb-2 block text-grey-darker">
-            Last name
-          </label>
+      {{#form.group as |group|}}
+        <div class="flex items-center">
+          <div class="w-1/5 text-right pr-4">
+            <label for=group.id class="mb-2 block text-grey-darker">
+              Last name
+            </label>
+          </div>
+          <div class="w-4/5">
+            <input id=group.id
+              class="mb-2 p-2 border rounded block w-full"
+              placeholder="Smith">
+          </div>
         </div>
-        <div class="w-4/5">
-          <input id='lastname'
-            class="mb-2 p-2 border rounded block w-full"
-            placeholder="Smith">
-        </div>
-      </div>
+      {{/form.group}}
+
 
       <div class="flex items-center">
         <div class="w-1/5 text-right pr-4">
