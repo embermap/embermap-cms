@@ -1,6 +1,6 @@
-<h1>Tags</h1>
+<div class="flex items-center justify-between">
+  <h1>Users</h1>
 
-<div class="text-right">
   {{#ui-button onClick=(action (mut isShowingAddUser) true)}}
     Add user
   {{/ui-button}}
@@ -51,54 +51,51 @@
 
 {{/if}}
 
-{{!-- {{#if isShowingAddUser}} --}}
-{{#if true}}
+{{#if isShowingAddUser}}
   {{#ui-modal onClose=(action (mut isShowingAddUser) false) as |modal|}}
     <h1 class='text-grey-darkest text-2xl p-0 m-0'>
       Add a user
     </h1>
 
-    <form class='mt-8'>
-
-      {{#let "firstname" as |id|}}
-        <div class="flex items-center">
-          <div class="w-1/5 text-right pr-4">
-            <label for={{id}} class="mb-2 block text-grey-darker">
-              First name
-            </label>
-          </div>
-          <div class="w-4/5">
-            <input id={{id}}
-              class="mb-2 p-2 border rounded block w-full"
-              placeholder="Alice">
-          </div>
-        </div>
-      {{/let}}
-
-      {{#form.group as |group|}}
-        <div class="flex items-center">
-          <div class="w-1/5 text-right pr-4">
-            <label for=group.id class="mb-2 block text-grey-darker">
-              Last name
-            </label>
-          </div>
-          <div class="w-4/5">
-            <input id=group.id
-              class="mb-2 p-2 border rounded block w-full"
-              placeholder="Smith">
-          </div>
-        </div>
-      {{/form.group}}
-
+    <form class="mt-6">
 
       <div class="flex items-center">
         <div class="w-1/5 text-right pr-4">
-          <label for='email' class="mb-2 block text-grey-darker">
+          <label for="firstname" class="mb-2 block text-grey-darker">
+            First name
+          </label>
+        </div>
+        <div class="w-4/5">
+          <input
+            id="firstname"
+            class="mb-2 p-2 border rounded block w-full"
+            placeholder="Alice">
+        </div>
+      </div>
+
+      <div class="flex items-center">
+        <div class="w-1/5 text-right pr-4">
+          <label for="lastname" class="mb-2 block text-grey-darker">
+            Last name
+          </label>
+        </div>
+        <div class="w-4/5">
+          <input
+            id="lastname"
+            class="mb-2 p-2 border rounded block w-full"
+            placeholder="Smith">
+        </div>
+      </div>
+
+      <div class="flex items-center">
+        <div class="w-1/5 text-right pr-4">
+          <label for="email" class="mb-2 block text-grey-darker">
             Email
           </label>
         </div>
         <div class="w-4/5">
-          <input id='email'
+          <input
+            id="email"
             type="email"
             class="mb-2 p-2 border rounded block w-full"
             placeholder="alice@acme.com">
@@ -107,24 +104,23 @@
 
       <div class="flex items-center">
         <div class="w-1/5 text-right pr-4">
-          <label for='age' class="mb-2 block text-grey-darker">
+          <label for="age" class="mb-2 block text-grey-darker">
             Age
           </label>
         </div>
         <div class="w-4/5">
-          <input id='age'
+          <input
+            id="age"
             type="number"
             class="mb-2 p-2 border rounded block w-full"
             placeholder="22">
         </div>
       </div>
 
-      <div class="mt-4 text-right">
-        <span class='mr-3'>
-          {{#ui-button style="gray" onClick=(action (mut isShowingAddUser) false)}}
-            Cancel
-          {{/ui-button}}
-        </span>
+      <div class="mt-3 text-right">
+        {{#ui-button style="gray" onClick=(action (mut isShowingAddUser) false)}}
+          Cancel
+        {{/ui-button}}
 
         {{#ui-button}}
           Add user
