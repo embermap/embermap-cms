@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  tagName: 'label'
+  tagName: 'label',
+  attributeBindings: ['for']
 });

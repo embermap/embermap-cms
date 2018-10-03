@@ -6,21 +6,25 @@
 
   {{#ui-form onSubmit=(action "login") class='mt-6' as |form|}}
 
-    <div class="mb-4">
-      {{#form.label class="text-sm font-semibold block text-grey-darkest"}}
-        Email
+    {{#form.group as |group|}}
+      <div class="mb-4">
+        {{#group.label class="text-sm font-semibold block text-grey-darkest"}}
+          Email
+        {{/group.label}}
 
-        {{form.input class="mt-1 p-2 border rounded w-full" placeholder="you@example.com"}}
-      {{/form.label}}
-    </div>
+        {{group.input class="mt-1 p-2 border rounded w-full" placeholder="you@example.com"}}
+      </div>
+    {{/form.group}}
 
-    <div class="mb-4">
-      {{#form.label class="text-sm font-semibold block text-grey-darkest"}}
-        Password
+    {{#form.group as |group|}}
+      <div class="mb-4">
+        {{#group.label class="text-sm font-semibold block text-grey-darkest"}}
+          Password
+        {{/group.label}}
 
-        {{form.input class="mt-1 p-2 border rounded w-full" type="password"}}
-      {{/form.label}}
-    </div>
+        {{group.input class="mt-1 p-2 border rounded w-full" type="password"}}
+      </div>
+    {{/form.group}}
 
     <div class="mt-4 text-right">
       {{#ui-button style="gray"}}
