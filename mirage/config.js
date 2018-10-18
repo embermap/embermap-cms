@@ -6,7 +6,7 @@ import moment from 'moment';
 faker.seed(123);
 
 export default function() {
-  this.timing = 200;
+  this.timing = +window.localStorage.getItem("timing") || 200;
 
   this.resource('tags');
   this.resource('posts');

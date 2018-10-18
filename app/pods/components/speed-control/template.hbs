@@ -1,0 +1,28 @@
+<div class="
+  absolute pin-b pin-r
+  bg-white
+  w-2/5
+  p-4 mb-4 mr-4
+  border-2 border-blue shadow">
+
+  <div class="flex mb-3">
+    <h4 class="p-0 m-0">
+      Server speed
+    </h4>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <input
+      type="range"
+      min="0"
+      max="10000"
+      value={{timing}}
+      oninput={{action "updateTiming"}}
+      step="100"
+      class="w-4/5">
+
+    <div class="">
+      {{timing}} ms
+    </div>
+  </div>
+</div>

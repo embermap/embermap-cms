@@ -11,7 +11,17 @@
 
 <div class='app'>
   <header class='app-header'>
-    Acme, Inc.
+    <div class="flex items-center">
+      <div>
+        Acme, Inc.
+      </div>
+
+      <div class="ml-auto opacity-50 cursor-pointer">
+        <a {{action (toggle "isShowingSpeedControl" this)}}>
+          {{fa-icon "gear"}}
+        </a>
+      </div>
+    </div>
   </header>
 
   <main class='app-main'>
@@ -43,3 +53,7 @@
     </section>
   </main>
 </div>
+
+{{#if isShowingSpeedControl}}
+  {{speed-control}}
+{{/if}}
