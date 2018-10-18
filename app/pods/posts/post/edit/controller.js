@@ -9,6 +9,12 @@ export default Controller.extend({
   save: task(function*() {
     yield this.model.save();
     yield this.router.transitionTo('posts.post.index');
-  })
+  }),
+
+  actions: {
+    cancel() {
+      this.transitionToRoute('posts.post', this.model);
+    }
+  }
 
 });

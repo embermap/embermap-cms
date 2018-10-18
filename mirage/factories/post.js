@@ -7,7 +7,7 @@ export default Factory.extend({
   },
 
   text() {
-    return faker.lorem.paragraphs(3).split('\n').join('\n<br /><br />');
+    return faker.lorem.paragraphs(3).split('\n').join('\n\n');
   },
 
   author() {

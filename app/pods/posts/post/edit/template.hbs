@@ -1,31 +1,35 @@
-<div class="flex mt-4">
-  <div class="w-3/4">
-    <h1 class='mt-0 w-full'>
-      {{input
-        value=model.title
-        class='w-full p-2 border border-grey-lighter'}}
-    </h1>
-
-    <div class="mt-4">
-      {{textarea value=model.text rows=20
-        class='p-2 border border-grey-lighter w-full'}}
-    </div>
+<div class="w-3/5 mt-4">
+  <div class="mb-4">
+    <label class="text-sm font-semibold block text-grey-darkest">
+      Title
+    </label>
+    {{input
+      value=model.title
+      class='w-full mt-1 p-2 border border-grey-lighter'}}
   </div>
 
-  <div class="w-1/4 pl-8">
+  <div class="mb-4">
+    <label class="text-sm font-semibold block text-grey-darkest">
+      Body
+    </label>
+    {{textarea value=model.text rows=20
+      class='mt-1 p-2 border border-grey-lighter w-full'}}
+  </div>
+
+  <div class="mt-4">
     {{#ui-button task=save data-test-id="save"}}
       Save
     {{/ui-button}}
 
-    {{#ui-button task=save style="gray" data-test-id="save"}}
+    {{#ui-button onClick=(action "cancel") style="gray" data-test-id="save"}}
       Cancel
     {{/ui-button}}
-
-    {{#if save.last.isError}}
-      <p class='mt-4 text-red' data-test-id="error">
-        {{fa-icon 'exclamation-circle'}}
-        Whoops - your post was not saved. Please try again!
-      </p>
-    {{/if}}
   </div>
+
+  {{#if save.last.isError}}
+    <p class='mt-4 text-red' data-test-id="error">
+      {{fa-icon 'exclamation-circle'}}
+      Whoops - your post was not saved. Please try again!
+    </p>
+  {{/if}}
 </div>

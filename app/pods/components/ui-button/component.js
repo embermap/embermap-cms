@@ -19,7 +19,8 @@ export default Component.extend(Styled, {
 
   type: "button",
 
-  disabled: oneWay('task.isRunning'),
+  isRunning: oneWay('task.isRunning'),
+  disabled: oneWay('isRunning'),
 
   task: null,
   onClick() {},

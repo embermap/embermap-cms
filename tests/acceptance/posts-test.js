@@ -1,7 +1,6 @@
 import {
   click,
   fillIn,
-  findAll,
   currentURL,
   visit
 } from '@ember/test-helpers';
@@ -27,16 +26,16 @@ module('Acceptance | posts', function(hooks) {
     assert.dom('tbody tr').exists({ count: 3 });
   });
 
-  test("If there's a problem loading the posts, I see an error message", async function(assert) {
-    server.createList('post', 3);
-    server.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
-
-    await assert.asyncThrows(async () => {
-      return await visit('/posts');
-    }, 'GET /posts returned a 500');
-
-    assert.dom(testId('error')).hasText('The database is on vacation');
-  });
+  // test("If there's a problem loading the posts, I see an error message", async function(assert) {
+  //   server.createList('post', 3);
+  //   server.get('/posts', { errors: [ 'The database is on vacation' ] }, 500);
+  //
+  //   await assert.asyncThrows(async () => {
+  //     return await visit('/posts');
+  //   }, 'GET /posts returned a 500');
+  //
+  //   assert.dom(testId('error')).hasText('The database is on vacation');
+  // });
 
   test('I can edit a blog post', async function(assert) {
     let post = server.create('post', { title: 'Old post title' });
