@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { task } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: 'form',
@@ -7,6 +8,10 @@ export default Component.extend({
 
   submit(event) {
     event.preventDefault();
-    this.onSubmit();
-  }
+    this.submitTask.perform();
+  },
+
+  submitTask: task(function*() {
+    yield this.onSubmit();
+  })
 });

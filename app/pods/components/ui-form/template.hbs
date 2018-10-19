@@ -1,8 +1,10 @@
 {{yield (hash
   label=(component 'ui-form/label')
   input=(component 'ui-form/input')
+  textarea=(component 'ui-form/textarea')
   group=(component 'ui-form/group')
+  isSubmitting=submitTask.isRunning
   submit=(component 'ui-button'
-    onClick=onSubmit
+    task=submitTask
     type="submit")
 )}}

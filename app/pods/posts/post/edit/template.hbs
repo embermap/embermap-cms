@@ -1,35 +1,50 @@
 <div class="w-3/5 mt-4">
-  <div class="mb-4">
-    <label class="text-sm font-semibold block text-grey-darkest">
-      Title
-    </label>
-    {{input
-      value=model.title
-      class='w-full mt-1 p-2 border border-grey-lighter'}}
-  </div>
+  {{#ui-form onSubmit=(perform save) as |form|}}
 
-  <div class="mb-4">
-    <label class="text-sm font-semibold block text-grey-darkest">
-      Body
-    </label>
-    {{textarea value=model.text rows=20
-      class='mt-1 p-2 border border-grey-lighter w-full'}}
-  </div>
+    {{#form.group as |group|}}
+      <div class="mb-4">
+        {{#group.label class="text-sm font-semibold block text-grey-darkest"}}
+          Title
+        {{/group.label}}
+        {{group.input
+          value=model.title
+          class='w-full mt-1 p-2 border border-grey-lighter'}}
+      </div>
+    {{/form.group}}
 
-  <div class="mt-4">
-    {{#ui-button task=save data-test-id="save"}}
-      Save
-    {{/ui-button}}
+    {{#form.group as |group|}}
+      <div class="mb-4">
+        {{#group.label class="text-sm font-semibold block text-grey-darkest"}}
+          Body
+        {{/group.label}}
+        {{group.textarea value=model.text rows=20
+          class='mt-1 p-2 border border-grey-lighter w-full'}}
+      </div>
+    {{/form.group}}
 
-    {{#ui-button onClick=(action "cancel") style="gray" data-test-id="save"}}
-      Cancel
-    {{/ui-button}}
-  </div>
+    <div>
+      {{#if form.isSubmitting}}
+        The form is saving...
+      {{else}}
+        The form is idle.
+      {{/if}}
+    </div>
 
-  {{#if save.last.isError}}
-    <p class='mt-4 text-red' data-test-id="error">
-      {{fa-icon 'exclamation-circle'}}
-      Whoops - your post was not saved. Please try again!
-    </p>
-  {{/if}}
+    <div class="mt-4">
+      {{#form.submit data-test-id="save"}}
+        Save
+      {{/form.submit}}
+
+      {{#ui-button onClick=(action "cancel") style="gray" data-test-id="save"}}
+        Cancel
+      {{/ui-button}}
+    </div>
+
+    {{#if save.last.isError}}
+      <p class='mt-4 text-red' data-test-id="error">
+        {{fa-icon 'exclamation-circle'}}
+        Whoops - your post was not saved. Please try again!
+      </p>
+    {{/if}}
+  {{/ui-form}}
 </div>
