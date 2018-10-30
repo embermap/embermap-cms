@@ -20,6 +20,10 @@ export default Component.extend({
     return [];
   }),
   'on-click': null,
+  duration: 350,
+  activeTransitions: 0,
+  onAnimationStart() {},
+  onAnimationEnd() {},
 
   highlightedLabel: or('selectedLabel', 'hoveredLabel'),
 
@@ -42,7 +46,25 @@ export default Component.extend({
     this.renderChart();
   },
 
+  transitionDidStart() {
+    if (!this.isDestroyed) {
+      this.incrementProperty('activeTransitions');
+    }
+  },
+
+  transitionDidEnd() {
+    if (!this.isDestroyed) {
+      this.decrementProperty('activeTransitions');
+
+      if (this.activeTransitions === 0) {
+        this.onAnimationEnd();
+      }
+    }
+  },
+
   renderChart() {
+    this.onAnimationStart();
+
     let data = this.data.sortBy('label');
     let counts = data.map(data => data.count);
 
@@ -60,7 +82,7 @@ export default Component.extend({
     let rafId;
     barsEnter
       .merge(barsUpdate)
-      .transition()
+      .transition().duration(this.duration)
       .attr('width', `${this.xScale.bandwidth()}%`)
       .attr('height', data => `${this.yScale(data.count)}%`)
       .attr('x', data => `${this.xScale(data.label)}%`)
@@ -83,12 +105,16 @@ export default Component.extend({
         if (index === 0) {
           cancelAnimationFrame(rafId);
         }
-      });
+      })
+      .on('start.animationChange', () => this.transitionDidStart())
+      .on('end.animationChange interrupt.animationChange', () => this.transitionDidEnd());
 
     barsExit
-      .transition()
+      .transition().duration(this.duration)
       .attr('opacity', 0)
-      .remove();
+      .remove()
+      .on('start.animationChange', () => this.transitionDidStart())
+      .on('end.animationChange interrupt.animationChange', () => this.transitionDidEnd());
 
     barsEnter
       .on('mouseover', data => {

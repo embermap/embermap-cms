@@ -7,12 +7,12 @@ import {
 import testId from '../helpers/test-id';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-// import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { assertionInjector } from '../assertions';
 
 module('Acceptance | posts', function(hooks) {
   setupApplicationTest(hooks);
-  // setupMirage(hooks);
+  setupMirage(hooks);
 
   hooks.beforeEach(function() {
     assertionInjector(this.owner);

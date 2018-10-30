@@ -4,6 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click, waitFor } from '@ember/test-helpers';
 import { task, timeout } from 'ember-concurrency';
 import hbs from 'htmlbars-inline-precompile';
+import { defineProperty } from '@ember/object';
 
 module('Integration | Component | ui-button', function(hooks) {
   setupRenderingTest(hooks);
@@ -37,7 +38,7 @@ module('Integration | Component | ui-button', function(hooks) {
       assert.step('button clicked');
       yield timeout(10);
     });
-    this.set('myTask', myTask);
+    defineProperty(this, 'myTask', myTask);
 
     await render(hbs`{{#ui-button task=myTask}}my button{{/ui-button}}`);
     await click('button');
@@ -47,7 +48,7 @@ module('Integration | Component | ui-button', function(hooks) {
 
   test('a button shows a loading spinner while the task is running', async function(assert) {
     let helper = new TaskHelper();
-    this.set('myTask', helper.task);
+    defineProperty(this, 'myTask', helper.task);
 
     await render(hbs`{{#ui-button task=myTask}}my button{{/ui-button}}`);
     click('button');
