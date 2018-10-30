@@ -2,7 +2,6 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { waitFor } from '@ember/test-helpers';
 import Pretender from 'pretender';
 
 module('Integration | Component | dashboard/repositories-list', function(hooks) {
