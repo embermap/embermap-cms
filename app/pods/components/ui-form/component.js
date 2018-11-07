@@ -1,10 +1,11 @@
 import Component from '@ember/component';
-import { task } from 'ember-concurrency';
+import { task, timeout, all } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: 'form',
 
   onSubmit() {},
+  afterSubmit() {},
 
   submit(event) {
     event.preventDefault();
@@ -12,6 +13,10 @@ export default Component.extend({
   },
 
   submitTask: task(function*() {
-    yield this.onSubmit();
+    yield all([
+      timeout(750),
+      this.onSubmit()
+    ]);
+    yield this.afterSubmit();
   })
 });

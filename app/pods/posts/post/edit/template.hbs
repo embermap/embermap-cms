@@ -1,5 +1,5 @@
 <div class="w-3/5 mt-4">
-  {{#ui-form onSubmit=(perform save) as |form|}}
+  {{#ui-form onSubmit=(perform save) afterSubmit=(perform afterSave) as |form|}}
 
     {{#form.group as |group|}}
       <div class="mb-4">
