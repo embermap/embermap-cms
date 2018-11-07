@@ -6,7 +6,8 @@ module.exports = function(environment) {
     podModulePrefix: 'embermap-cms/pods',
     environment: environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'router-scroll',
+    historySupportMiddleware: true,
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -28,6 +29,9 @@ module.exports = function(environment) {
     },
     'ember-component-css': {
       namespacing: false
+    },
+    'routerScroll': {
+      scrollElement: '#center-panel'
     },
     flashMessageDefaults: {
       extendedTimeout: 500

@@ -58,6 +58,7 @@
     "ember-modal-dialog": "^2.4.1",
     "ember-moment": "^7.6.0",
     "ember-resolver": "^5.0.1",
+    "ember-router-scroll": "^1.0.1",
     "ember-source": "~3.4.0",
     "ember-tether": "^1.0.0-beta.0",
     "ember-truth-helpers": "~2.0.0",
