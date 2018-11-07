@@ -1,8 +1,8 @@
 {{#if flashMessages.queue}}
-  <div class="no-events fixed flex flex-column justify-end items-start z-999 vh-100 vw-100">
+  <div class="no-events fixed flex flex-col justify-end items-start z-999 h-screen w-screen">
     {{#each flashMessages.queue as |flash|}}
       <div class="
-        ml3 mb3 white bg-dark-gray pv3 ph4 shadow-4 br2 fade-up-and-down">
+        ml-4 mb-4 text-white bg-black px-4 py-4 shadow rounded-lg fade-up-and-down">
         {{flash.message}}
       </div>
     {{/each}}
