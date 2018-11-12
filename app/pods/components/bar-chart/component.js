@@ -1,11 +1,12 @@
 /* global Tether */
 import { computed } from '@ember/object';
-
 import { or } from '@ember/object/computed';
 import Component from '@ember/component';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import 'd3-transition';
+import { registerWaiter, unregisterWaiter } from '@ember/test';
+import { later } from '@ember/runloop';
 
 const COLORS = {
   blue: [ '#bbdefb' , '#2196f3' ],
@@ -34,12 +35,24 @@ export default Component.extend({
   }),
 
   didInsertElement() {
+    registerWaiter(this, this._waiter);
+
     this.set('yScale', scaleLinear().range([ 0, 100 ]));
     this.set('colorScale', scaleLinear().range(COLORS[this.color]));
     this.set('xScale', scaleBand().range([ 0, 100 ]).paddingInner(0.12));
 
     this.renderChart();
     this.set('didRenderChart', true);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    unregisterWaiter(this, this._waiter);
+  },
+
+  _waiter() {
+    return this.get('activeTransitions') === 0 && this.get('mayHaveScheduledTransitions') === false;
   },
 
   didUpdateAttrs() {
@@ -57,13 +70,14 @@ export default Component.extend({
       this.decrementProperty('activeTransitions');
 
       if (this.activeTransitions === 0) {
-        this.onAnimationEnd();
+        // this.onAnimationEnd();
       }
     }
   },
 
   renderChart() {
-    this.onAnimationStart();
+    // this.onAnimationStart();
+    this.set('mayHaveScheduledTransitions', true);
 
     let data = this.data.sortBy('label');
     let counts = data.map(data => data.count);
@@ -138,6 +152,10 @@ export default Component.extend({
           this.renderChart();
         }
       });
+
+    later(() => {
+      this.set('mayHaveScheduledTransitions', false);
+    }, 20);
   }
 
 });
