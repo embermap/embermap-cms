@@ -7,6 +7,14 @@ import { waitUntil } from '@ember/test-helpers';
 module('Integration | Component | bar-chart', function(hooks) {
   setupRenderingTest(hooks);
 
+  test('it can render an empty chart', async function(assert) {
+    await render(hbs`
+      {{bar-chart}}
+    `);
+
+    assert.dom('svg').exists();
+  });
+
   test('it can render two bars', async function(assert) {
     this.set('data', [
       { label: 'Label 1', count: 5 },
