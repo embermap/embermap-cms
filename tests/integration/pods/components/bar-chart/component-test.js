@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { waitUntil } from '@ember/test-helpers';
+import { settled } from '@ember/test-helpers';
 
 module('Integration | Component | bar-chart', function(hooks) {
   setupRenderingTest(hooks);
@@ -24,11 +24,8 @@ module('Integration | Component | bar-chart', function(hooks) {
     await render(hbs`
       {{bar-chart data=data
         duration=10
-        onAnimationStart=(action (mut isAnimating) true)
-        onAnimationEnd=(action (mut isAnimating) false)
       }}
     `);
-    await waitUntil(() => this.isAnimating === false);
 
     assert.dom('rect').exists({ count: 2 });
   });
@@ -42,11 +39,8 @@ module('Integration | Component | bar-chart', function(hooks) {
     await render(hbs`
       {{bar-chart data=data
         duration=10
-        onAnimationStart=(action (mut isAnimating) true)
-        onAnimationEnd=(action (mut isAnimating) false)
       }}
     `);
-    await waitUntil(() => this.isAnimating === false);
 
     assert.dom('rect').exists({ count: 2 });
 
@@ -55,7 +49,7 @@ module('Integration | Component | bar-chart', function(hooks) {
       { label: 'Label 2', count: 8 },
       { label: 'Label 3', count: 3 }
     ]);
-    await waitUntil(() => this.isAnimating === false);
+    await settled();
 
     assert.dom('rect').exists({ count: 3 });
   });
@@ -69,11 +63,8 @@ module('Integration | Component | bar-chart', function(hooks) {
     await render(hbs`
       {{bar-chart data=data
         duration=10
-        onAnimationStart=(action (mut isAnimating) true)
-        onAnimationEnd=(action (mut isAnimating) false)
       }}
     `);
-    await waitUntil(() => this.isAnimating === false);
 
     assert.dom('rect').exists({ count: 2 });
 
@@ -82,14 +73,14 @@ module('Integration | Component | bar-chart', function(hooks) {
       { label: 'Label 2', count: 8 },
       { label: 'Label 3', count: 3 }
     ]);
-    await waitUntil(() => this.isAnimating === false);
+    await settled();
 
     assert.dom('rect').exists({ count: 3 });
 
     this.set('data', [
       { label: 'Label 1', count: 5 }
     ]);
-    await waitUntil(() => this.isAnimating === false);
+    await settled();
 
     assert.dom('rect').exists({ count: 1 });
   });
@@ -103,11 +94,8 @@ module('Integration | Component | bar-chart', function(hooks) {
     await render(hbs`
       {{bar-chart data=data
         duration=10
-        onAnimationStart=(action (mut isAnimating) true)
-        onAnimationEnd=(action (mut isAnimating) false)
       }}
     `);
-    await waitUntil(() => this.isAnimating === false);
 
     assert.dom('rect:nth-child(1)').hasAttribute('height', '50%');
     assert.dom('rect:nth-child(2)').hasAttribute('height', '100%');
@@ -116,7 +104,7 @@ module('Integration | Component | bar-chart', function(hooks) {
       { label: 'Label 1', count: 10 },
       { label: 'Label 2', count: 10 }
     ]);
-    await waitUntil(() => this.isAnimating === false);
+    await settled();
 
     assert.dom('rect:nth-child(1)').hasAttribute('height', '100%');
     assert.dom('rect:nth-child(2)').hasAttribute('height', '100%');
