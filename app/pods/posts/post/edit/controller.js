@@ -8,7 +8,12 @@ export default Controller.extend({
   flashMessages: service(),
 
   save: task(function*() {
-    yield this.model.save();
+    let { validations } = yield this.model.validate();
+    if (validations.isValid) {
+      yield this.model.save();
+    } else {
+      throw "The form is invalid";
+    }
   }),
 
   afterSave: task(function*() {

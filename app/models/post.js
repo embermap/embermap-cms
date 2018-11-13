@@ -1,6 +1,12 @@
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+let Validations = buildValidations({
+  title: validator('presence', true),
+  text: validator('presence', true)
+})
+
+export default DS.Model.extend(Validations, {
 
   comments: DS.hasMany(),
   tags: DS.hasMany(),

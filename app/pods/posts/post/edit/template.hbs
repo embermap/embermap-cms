@@ -40,7 +40,14 @@
       {{/ui-button}}
     </div>
 
-    {{#if save.last.isError}}
+    {{#if (and form.didSubmit (v-get model "isInvalid"))}}
+      <p class='mt-4 text-red' data-test-id="error">
+        {{fa-icon 'exclamation-circle'}}
+        Whoops - your post was not saved. Please fix the errors above.
+      </p>
+    {{/if}}
+
+    {{#if (and (v-get model "isValid") save.last.isError)}}
       <p class='mt-4 text-red' data-test-id="error">
         {{fa-icon 'exclamation-circle'}}
         Whoops - your post was not saved. Please try again!
