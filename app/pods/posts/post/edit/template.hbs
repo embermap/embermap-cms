@@ -2,14 +2,27 @@
   {{#ui-form onSubmit=(perform save) afterSubmit=(perform afterSave) as |form|}}
 
     {{#form.group as |group|}}
-      <div class="mb-4">
-        {{#group.label class="text-sm font-semibold block text-grey-darkest"}}
-          Title
-        {{/group.label}}
-        {{group.input
-          value=model.title
-          class='w-full mt-1 p-2 border border-grey-lighter'}}
-      </div>
+      {{#let (and form.didSubmit (v-get model "title" "isInvalid")) as |groupIsInvalid|}}
+        <div class="mb-4">
+          {{#group.label class=(concat
+            "text-sm font-semibold block "
+            (if groupIsInvalid "text-red" "text-grey-darkest")
+          )}}
+            Title
+          {{/group.label}}
+          {{group.input
+            value=model.title
+            class=(concat
+              'w-full mt-1 p-2 border '
+              (if groupIsInvalid 'border-red' 'border-grey-lighter')
+            )}}
+          {{#if groupIsInvalid}}
+            <div class="text-red mt-3">
+              {{v-get model "title" "messages"}}
+            </div>
+          {{/if}}
+        </div>
+      {{/let}}
     {{/form.group}}
 
     {{#form.group as |group|}}
