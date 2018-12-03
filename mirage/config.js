@@ -47,6 +47,7 @@ export default function() {
     return post;
   });
   // this.patch('/posts/:id', { errors: [ ] }, 500);
+  // this.patch('/posts/:id', { errors: [ ] }, 422);
 
   this.get('albums', filterable('albums', [ 'slug' ]));
   this.get('images', filterable('images', [ 'slug', 'style' ]));

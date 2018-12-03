@@ -7,7 +7,7 @@ export default Controller.extend({
   router: service(),
   flashMessages: service(),
 
-  save: task(function*() {
+  validateAndSave: task(function*() {
     let { validations } = yield this.model.validate();
     if (validations.isValid) {
       yield this.model.save();

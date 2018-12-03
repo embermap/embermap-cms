@@ -1,5 +1,5 @@
 <div class="w-3/5 mt-4">
-  {{#ui-form onSubmit=(perform save) afterSubmit=(perform afterSave) as |form|}}
+  {{#ui-form onSubmit=(perform validateAndSave) afterSubmit=(perform afterSave) as |form|}}
 
     {{#form.group as |group|}}
       {{#let (and form.didSubmit (v-get model "title" "isInvalid")) as |groupIsInvalid|}}
@@ -60,7 +60,7 @@
       </p>
     {{/if}}
 
-    {{#if (and (v-get model "isValid") save.last.isError)}}
+    {{#if model.lastSaveFailed}}
       <p class='mt-4 text-red' data-test-id="error">
         {{fa-icon 'exclamation-circle'}}
         Whoops - your post was not saved. Please try again!
